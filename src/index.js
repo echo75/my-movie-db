@@ -35,8 +35,8 @@ class User {
     this.watchedlist.push(movie)
     return movie
   }
-  removeMovieFromWatchedlist(id) {
-    this.watchedlist = this.watchedlist.filter(movie => movie.id !== id)
+  removeMovieFromWatchedlist(movieId) {
+    this.watchedlist = this.watchedlist.filter(movie => movie.movieId !== movieId)
   }
   // rateMovie(id, rating) {
   //   const movie = this.watchedlist.find(movie => movie.id === id)
