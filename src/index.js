@@ -12,6 +12,7 @@ class User {
   watchlist = []
   watchedlist = []
   rating = []
+  review = []
 
   constructor(id, forename, surname, email, password, date) {
     this.id = id
@@ -48,7 +49,7 @@ class User {
   }
   reviewMovie(id, review, movieId, userId) {
     const moviereview = new ReviewMovie(id, review, movieId, userId)
-    this.rating.push(moviereview)
+    this.review.push(moviereview)
     return moviereview
   }
 }
