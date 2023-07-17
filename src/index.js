@@ -11,6 +11,7 @@
 class User {
   watchlist = []
   watchedlist = []
+  rating = []
 
   constructor(id, forename, surname, email, password, date) {
     this.id = id
@@ -20,31 +21,41 @@ class User {
     this.password = password
     this.date = date
   }
-  putMovieOnWatchlist(id, title, year, genre, rating, date, poster) {
-    const movie = new Movie(id, title, year, genre, rating, date, poster)
+  putMovieOnWatchlist(movieId, title, year, genre, rating, date, poster) {
+    const movie = new Movie(movieId, title, year, genre, rating, date, poster)
     this.watchlist.push(movie)
     return movie
   }
-  removeMovieFromWatchlist(id) {
-    this.watchlist = this.watchlist.filter(movie => movie.id !== id)
+  removeMovieFromWatchlist(movieId) {
+    this.watchlist = this.watchlist.filter(movie => movie.movieId !== movieId)
   }
-  putMovieOnWatchedlist(id, title, year, genre, rating, date, poster) {
-    const movie = new Movie(id, title, year, genre, rating, date, poster)
+  putMovieOnWatchedlist(movieId, title, year, genre, rating, date, poster) {
+    const movie = new Movie(movieId, title, year, genre, rating, date, poster)
     this.watchedlist.push(movie)
     return movie
   }
   removeMovieFromWatchedlist(id) {
     this.watchedlist = this.watchedlist.filter(movie => movie.id !== id)
   }
-  rateMovie(id, rating) {
-    const movie = this.watchedlist.find(movie => movie.id === id)
-    movie.rating = rating
+  // rateMovie(id, rating) {
+  //   const movie = this.watchedlist.find(movie => movie.id === id)
+  //   movie.rating = rating
+  // }
+  rateMovie(id, rating, movieId, userId) {
+    const movierating = new RateMovie(id, rating, movieId, userId)
+    this.rating.push(movierating)
+    return movierating
+  }
+  reviewMovie(id, review, movieId, userId) {
+    const moviereview = new ReviewMovie(id, review, movieId, userId)
+    this.rating.push(moviereview)
+    return moviereview
   }
 }
 
 class Movie {
-  constructor(id, title, year, genre, rating, date, poster) {
-    this.id = id
+  constructor(movieId, title, year, genre, rating, date, poster) {
+    this.movieId = movieId
     this.title = title
     this.year = year
     this.genre = genre
@@ -53,6 +64,26 @@ class Movie {
     this.poster = poster
   }
 }
+
+// Own class for RateMovie
+class RateMovie {
+  constructor(id, rating, movieId, userId) {
+    this.id = id
+    this.rating = rating
+    this.movieId = movieId
+    this.userId = userId
+  }
+}
+// Own class for ReviewMovie
+class ReviewMovie {
+  constructor(id, review, movieId, userId) {
+    this.id = id
+    this.review = review
+    this.movieId = movieId
+    this.userId = userId
+  }
+}
+
 // Two users with their data in an array
 const users = [
   [1, 'Morgan', 'Lindgren', 'johan@hedman.de', 'Df1234PWD', '2023-07-17'],
@@ -144,5 +175,6 @@ morgan.putMovieOnWatchedlist(
 )
 
 morgan.removeMovieFromWatchedlist(4) // remove the movie with id 4 from the watchedlist (Matrix Resurrections)
-morgan.rateMovie(6, 9) // rate the movie with id 6 to 9 (Nemo)
+morgan.rateMovie(1, 9, 6, 1) // rate the movie with id 1, rating 9, movieId 6, userId 1
+morgan.reviewMovie(1, '"Find Nemo" is a great movie', 6, 1) // review the movie with id 1, review 'This is a great movie', movieId 6, userId 1
 console.log(morgan)
