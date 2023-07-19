@@ -8,8 +8,8 @@
 // User should be able to put the movie on a watched list
 // User should be able to rate the movie
 
-const fs = require('fs')
-const { chalk } = require('./chalk.js')
+const { fs } = require('./base.js')
+const { chalk } = require('./base.js')
 
 class User {
   watchlist = []
