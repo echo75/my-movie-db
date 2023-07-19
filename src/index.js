@@ -9,6 +9,7 @@
 // User should be able to rate the movie
 
 const fs = require('fs')
+const { chalk } = require('./chalk.js')
 
 class User {
   watchlist = []
@@ -126,3 +127,14 @@ morgan.removeMovieFromWatchedlist(4) // remove the movie with id 4 from the watc
 morgan.rateMovie(1, 9, 6, 1) // rate the movie with id 1, rating 9, movieId 6, userId 1
 morgan.reviewMovie(1, '"Find Nemo" is a great movie', 6, 1) // review the movie with id 1, review 'This is a great movie', movieId 6, userId 1
 console.log(morgan)
+
+// Fun with chalk:
+string = '\nHello World\n\n'
+const array = string.split('') // split the string into an array
+const newArray = array.map((letter, index) => {
+  if (index % 2 === 0) {
+    process.stdout.write(`${chalk.blue(letter)}`)
+  } else {
+    process.stdout.write(`${chalk.yellow(letter)}`)
+  }
+})
