@@ -8,6 +8,8 @@
 // User should be able to put the movie on a watched list
 // User should be able to rate the movie
 
+const fs = require('fs')
+
 class User {
   watchlist = []
   watchedlist = []
@@ -85,86 +87,31 @@ class ReviewMovie {
   }
 }
 
-// Two users with their data in an array
+// Two users with their data in an array - NOT used anymore
 const users = [
   [1, 'Morgan', 'Lindgren', 'johan@hedman.de', 'Df1234PWD', '2023-07-17'],
   [2, 'Jenny', 'Karlsson', 'johan.hedman@echoload.com', 'GtABcPWD', '2023-07-17'],
 ]
 
-// Movies with their data in an array
-const movies = [
-  [
-    1,
-    'The Matrix',
-    1999,
-    'Action',
-    5,
-    '2023-07-17',
-    'https://www.imdb.com/title/tt0133093/mediaviewer/rm3594684160/?ref_=tt_ov_i',
-  ],
-  [
-    2,
-    'The Matrix Reloaded',
-    2003,
-    'Action',
-    5,
-    '2023-07-17',
-    'https://www.imdb.com/title/tt0234215/mediaviewer/rm3594684160/?ref_=tt_ov_i',
-  ],
-  [
-    3,
-    'The Matrix Revolutions',
-    2003,
-    'Action',
-    5,
-    '2023-07-17',
-    'https://www.imdb.com/title/tt0242653/mediaviewer/rm3594684160/?ref_=tt_ov_i',
-  ],
-  [
-    4,
-    'The Matrix Resurrections',
-    2021,
-    'Action',
-    5,
-    '2023-07-17',
-    'https://www.imdb.com/title/tt10838180/mediaviewer/rm3594684160/?ref_=tt_ov_i',
-  ],
-  [
-    5,
-    'Find Nemo',
-    2003,
-    'Animation',
-    5,
-    '2023-07-17',
-    'https://www.imdb.com/title/tt0266543/mediaviewer/rm3594684160/?ref_=tt_ov_i',
-  ],
-]
+// use fs to read the USER json file
+const dataUser = fs.readFileSync('./src/user.json', 'utf8')
+// parse the data to get an array of objects
+const assocArrayUser = JSON.parse(dataUser)
+const arrayUser = assocArrayUser.map(item => Object.values(item)) //convert the assoc array to a numeric array
 
-const morgan = new User(...users[0])
-const jenny = new User(...users[1])
+// use fs to read the MOVIES json file
+const dataMovie = fs.readFileSync('./src/movies.json', 'utf8')
+// parse the data to get an array of objects
+const assocArrayMovie = JSON.parse(dataMovie)
+const arrayMovie = assocArrayMovie.map(item => Object.values(item)) //convert the assoc array to a numeric array
 
-//const morganWatchlist = movies.map(movie => new Movie(...movie))
-//morgan.watchlist = morganWatchlist
+const morgan = new User(...arrayUser[0])
+//const jenny = new User(...arrayUser[1])
 
-morgan.putMovieOnWatchlist(
-  5,
-  'The Matrix',
-  1999,
-  'Action',
-  5,
-  '2023-07-17',
-  'https://www.imdb.com/title/tt0133093/mediaviewer/rm3594684160/?ref_=tt_ov_i'
-)
+morgan.putMovieOnWatchlist(...arrayMovie[1])
+morgan.putMovieOnWatchedlist(...arrayMovie[2])
 
-morgan.putMovieOnWatchedlist(
-  4,
-  'The Matrix Resurrections',
-  2021,
-  'Action',
-  5,
-  '2023-07-17',
-  'https://www.imdb.com/title/tt10838180/mediaviewer/rm3594684160/?ref_=tt_ov_i'
-)
+// vintage sytle - with an array
 morgan.putMovieOnWatchedlist(
   6,
   'Find Nemo',
