@@ -8,28 +8,28 @@ class User {
   rating = []
   review = []
 
-  constructor(forename, surname, email, password, date) {
-    this.forename = forename
-    this.surname = surname
-    this.email = email
-    this.password = password
-    this.date = date
+  constructor(assocArrayUser) {
+    this.forename = assocArrayUser.forename
+    this.surname = assocArrayUser.surname
+    this.email = assocArrayUser.email
+    this.password = assocArrayUser.password
+    this.date = assocArrayUser.date
   }
   putMovieOnwatch(movieId, title, year, genre, rating, date, poster) {
     const movie = new Movie(movieId, title, year, genre, rating, date, poster)
     this.watch.push(movie)
     return movie
   }
-  removeMovieFromwatch(movieId) {
-    this.watch = this.watch.filter(movie => movie.movieId !== movieId)
+  removeMovieFromwatch(MovieSource, movieId) {
+    this.watch = this.watch.filter(MovieSource => MovieSource.movieId !== movieId)
   }
   putMovieOnwatched(movieId, title, year, genre, rating, date, poster) {
     const movie = new Movie(movieId, title, year, genre, rating, date, poster)
     this.watched.push(movie)
     return movie
   }
-  removeMovieFromwatched(movieId) {
-    this.watched = this.watched.filter(movie => movie.movieId !== movieId)
+  removeMovieFromwatched(MovieSource, movieId) {
+    this.watched = this.watched.filter(MovieSource => MovieSource.movieId !== movieId)
   }
   Rating(rating, movieId, userId) {
     const movierating = new Rating(rating, movieId, userId)
