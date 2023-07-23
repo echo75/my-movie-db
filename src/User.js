@@ -22,8 +22,9 @@ class User {
     return movie
   }
   removeMovieFromwatch(MovieSource, imdbID) {
-    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
     this.watch = this.watch.filter(MovieSource => MovieSource.imdbID !== imdbID)
+    // redundant code - just for display purposes:
+    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
     return `Removed from watch-list '${chalk.green(removedMovie.Title)}'`
   }
   putMovieOnwatched(MovieSource, imdbID) {
@@ -32,8 +33,9 @@ class User {
     return movie
   }
   removeMovieFromwatched(MovieSource, imdbID) {
-    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
     this.watched = this.watched.filter(MovieSource => MovieSource.imdbID !== imdbID)
+    // redundant code - just for display purposes:
+    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
     return `Removed from watched-list '${chalk.green(removedMovie.Title)}'`
   }
   Rating(rating, imdbID, userId) {
