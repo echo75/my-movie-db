@@ -1,0 +1,31 @@
+{
+  "Title": "GoldenEye",
+  "Year": "1995",
+  "Rated": "PG-13",
+  "Released": "17 Nov 1995",
+  "Runtime": "130 min",
+  "Genre": "Action, Adventure, Thriller",
+  "Director": "Martin Campbell",
+  "Writer": "Ian Fleming, Michael France, Jeffrey Caine",
+  "Actors": "Pierce Brosnan, Sean Bean, Izabella Scorupco",
+  "Plot": "When a deadly satellite weapon system falls into the wrong hands, only Agent James Bond 007 (Pierce Brosnan) can save the world from certain disaster. Armed with his licence to kill, Bond races to Russia in search of the stolen access codes for \"GoldenEye\", an awesome space weapon that can fire a devastating electromagnetic pulse toward Earth. But 007 is up against an enemy who anticipates his every move: a mastermind motivated by years of simmering hatred. Bond also squares off against Xenia Onatopp (Famke Janssen), an assassin who uses pleasure as her ultimate weapon.",
+  "Language": "English, Russian, Spanish",
+  "Country": "United Kingdom, United States",
+  "Awards": "Nominated for 2 BAFTA 2 wins & 8 nominations total",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BOWI0MTJlMjEtYTI0ZS00NWZiLWE1ZmItYzBlZTE5YTk3NTJiXkEyXkFqcGdeQXVyMTEwNDU1MzEy._V1_SX300.jpg",
+  "Ratings": [
+    { "Source": "Internet Movie Database", "Value": "7.2/10" },
+    { "Source": "Rotten Tomatoes", "Value": "80%" },
+    { "Source": "Metacritic", "Value": "65/100" }
+  ],
+  "Metascore": "65",
+  "imdbRating": "7.2",
+  "imdbVotes": "263,338",
+  "imdbID": "tt0113189",
+  "Type": "movie",
+  "DVD": "24 Mar 2009",
+  "BoxOffice": "$106,429,941",
+  "Production": "N/A",
+  "Website": "N/A",
+  "Response": "True"
+}

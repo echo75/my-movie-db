@@ -1,7 +1,7 @@
 class Rating {
-  constructor(rating, movieId, userId) {
+  constructor(rating, imdbID, userId) {
     this.rating = rating
-    this.movieId = movieId
+    this.imdbID = imdbID
     this.userId = userId
   }
 }

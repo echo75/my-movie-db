@@ -1,0 +1,76 @@
+{
+  "Search": [
+    {
+      "Title": "Kingsman: The Golden Circle",
+      "Year": "2017",
+      "imdbID": "tt4649466",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ3OTgzMzY4NF5BMl5BanBnXkFtZTgwOTc4OTQyMzI@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Hellboy II: The Golden Army",
+      "Year": "2008",
+      "imdbID": "tt0411477",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjA5NzgyMjc2Nl5BMl5BanBnXkFtZTcwOTU3MDI3MQ@@._V1_SX300.jpg"
+    },
+    {
+      "Title": "The Golden Compass",
+      "Year": "2007",
+      "imdbID": "tt0385752",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTM2NDkxMjQxMV5BMl5BanBnXkFtZTYwNTMxMDM4._V1_SX300.jpg"
+    },
+    {
+      "Title": "The Man with the Golden Gun",
+      "Year": "1974",
+      "imdbID": "tt0071807",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BYjY3YmM1MTItMWE0NC00NjFmLWFkMDgtMWFiZjY5NzQyZGVjXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Elizabeth: The Golden Age",
+      "Year": "2007",
+      "imdbID": "tt0414055",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTgzODIwNzcyMF5BMl5BanBnXkFtZTcwMTg0MTQ1MQ@@._V1_SX300.jpg"
+    },
+    {
+      "Title": "The Golden Child",
+      "Year": "1986",
+      "imdbID": "tt0091129",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BYmY0MTJmNTktOGZiMC00YmU0LTlhZjQtODBlMmNkNTE3MmVlXkEyXkFqcGdeQXVyMTUyOTc1NDYz._V1_SX300.jpg"
+    },
+    {
+      "Title": "Curse of the Golden Flower",
+      "Year": "2006",
+      "imdbID": "tt0473444",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTA3NTY2MjA0NzFeQTJeQWpwZ15BbWU3MDgwNTA3NDE@._V1_SX300.jpg"
+    },
+    {
+      "Title": "On Golden Pond",
+      "Year": "1981",
+      "imdbID": "tt0082846",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNDhhMWU5YjYtNDM5OC00NDk2LThjYzEtN2FiNTAxMmZlOTFjXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "The Golden Glove",
+      "Year": "2019",
+      "imdbID": "tt7670212",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjdlOWZiYjQtNDFkZi00NzZmLThlYWEtYWY4NjAyNDFjMjNkXkEyXkFqcGdeQXVyNTQwMDA5NTg@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Berserk: The Golden Age Arc I - The Egg of the King",
+      "Year": "2012",
+      "imdbID": "tt2210479",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BYzA0ZGYxYzAtMmJlOC00OTFkLThhNmItYTdlMTdkNDY2NzQ4L2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg"
+    }
+  ],
+  "totalResults": "1731",
+  "Response": "True"
+}

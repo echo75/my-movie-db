@@ -1,12 +1,18 @@
 class Movie {
-  constructor(movieId, title, year, genre, rating, date, poster) {
-    this.movieId = movieId
-    this.title = title
-    this.year = year
-    this.genre = genre
-    this.rating = rating
-    this.date = date
-    this.poster = poster
+  constructor(MovieSource, imdbID) {
+    this.givenMovieId = imdbID
+    this.MovieSource = MovieSource
+  }
+
+  saveMovie() {
+    let entry = null
+    for (const movie of this.MovieSource.Search) {
+      if (movie.imdbID === this.givenMovieId) {
+        entry = movie
+        break // Found the entry, no need to continue searching
+      }
+    }
+    return entry
   }
 }
 

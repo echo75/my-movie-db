@@ -1,7 +1,7 @@
 class Review {
-  constructor(review, movieId, userId) {
+  constructor(review, imdbID, userId) {
     this.review = review
-    this.movieId = movieId
+    this.imdbID = imdbID
     this.userId = userId
   }
 }

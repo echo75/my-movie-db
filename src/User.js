@@ -1,6 +1,7 @@
 const Movie = require('./Movie.js')
 const Review = require('./Review.js')
 const Rating = require('./Rating.js')
+const { chalk } = require('./base.js')
 
 class User {
   watch = []
@@ -15,29 +16,33 @@ class User {
     this.password = assocArrayUser.password
     this.date = assocArrayUser.date
   }
-  putMovieOnwatch(movieId, title, year, genre, rating, date, poster) {
-    const movie = new Movie(movieId, title, year, genre, rating, date, poster)
+  putMovieOnwatch(MovieSource, imdbID) {
+    const movie = new Movie(MovieSource, imdbID).saveMovie()
     this.watch.push(movie)
     return movie
   }
-  removeMovieFromwatch(MovieSource, movieId) {
-    this.watch = this.watch.filter(MovieSource => MovieSource.movieId !== movieId)
+  removeMovieFromwatch(MovieSource, imdbID) {
+    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
+    this.watch = this.watch.filter(MovieSource => MovieSource.imdbID !== imdbID)
+    return `Removed from watch-list '${chalk.green(removedMovie.Title)}'`
   }
-  putMovieOnwatched(movieId, title, year, genre, rating, date, poster) {
-    const movie = new Movie(movieId, title, year, genre, rating, date, poster)
+  putMovieOnwatched(MovieSource, imdbID) {
+    const movie = new Movie(MovieSource, imdbID).saveMovie()
     this.watched.push(movie)
     return movie
   }
-  removeMovieFromwatched(MovieSource, movieId) {
-    this.watched = this.watched.filter(MovieSource => MovieSource.movieId !== movieId)
+  removeMovieFromwatched(MovieSource, imdbID) {
+    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
+    this.watched = this.watched.filter(MovieSource => MovieSource.imdbID !== imdbID)
+    return `Removed from watched-list '${chalk.green(removedMovie.Title)}'`
   }
-  Rating(rating, movieId, userId) {
-    const movierating = new Rating(rating, movieId, userId)
+  Rating(rating, imdbID, userId) {
+    const movierating = new Rating(rating, imdbID, userId)
     this.rating.push(movierating)
     return movierating
   }
-  Review(review, movieId, userId) {
-    const moviereview = new Review(review, movieId, userId)
+  Review(review, imdbID, userId) {
+    const moviereview = new Review(review, imdbID, userId)
     this.review.push(moviereview)
     return moviereview
   }
