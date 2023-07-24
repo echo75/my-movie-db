@@ -1,7 +1,7 @@
 const Movie = require('./Movie.js')
 const Review = require('./Review.js')
 const Rating = require('./Rating.js')
-const { chalk } = require('./base.js')
+const chalk = require('chalk')
 
 class User {
   watch = []
