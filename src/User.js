@@ -16,24 +16,24 @@ class User {
     this.password = registeredUsers.password
     this.date = registeredUsers.date
   }
-  putMovieOnwatch(MovieSource, imdbID) {
+  putMovieOnWatch(MovieSource, imdbID) {
     //
     const movie = new Movie(MovieSource, imdbID).save()
     this.watch.push(movie)
     return movie
   }
-  removeMovieFromwatch(MovieSource, imdbID) {
+  removeMovieFromWatch(MovieSource, imdbID) {
     this.watch = this.watch.filter(MovieSource => MovieSource.imdbID !== imdbID)
     // redundant code - just for display purposes:
     const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
     return `Removed from watch-list '${chalk.green(removedMovie.Title)}'`
   }
-  putMovieOnwatched(MovieSource, imdbID) {
+  putMovieOnWatched(MovieSource, imdbID) {
     const movie = new Movie(MovieSource, imdbID).save()
     this.watched.push(movie)
     return movie
   }
-  removeMovieFromwatched(MovieSource, imdbID) {
+  removeMovieFromWatched(MovieSource, imdbID) {
     this.watched = this.watched.filter(MovieSource => MovieSource.imdbID !== imdbID)
     // redundant code - just for display purposes:
     const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
