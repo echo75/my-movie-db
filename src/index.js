@@ -6,13 +6,13 @@ const Rating = require('./Rating.js')
 const JSONReader = require('./Jsonreader.js')
 
 // use JSONReader to read the USER json file
-const filePathUsers = './src/user.json'
+const filePathUsers = './src/source/user.json'
 const jsonReaderUsers = new JSONReader(filePathUsers)
 const registeredUsers = jsonReaderUsers.readJSON()
 //console.log(registeredUsers)
 
 // use JSONReader to read the MOVIES json file
-const filePathMovies = './src/movies_omdb.json'
+const filePathMovies = './src/source/movies_omdb.json'
 const jsonReaderMovies = new JSONReader(filePathMovies)
 const MovieSource = jsonReaderMovies.readJSON()
 //console.log(MovieSource['Search'])
