@@ -9,15 +9,16 @@ class User {
   rating = []
   review = []
 
-  constructor(assocArrayUser) {
-    this.forename = assocArrayUser.forename
-    this.surname = assocArrayUser.surname
-    this.email = assocArrayUser.email
-    this.password = assocArrayUser.password
-    this.date = assocArrayUser.date
+  constructor(registeredUsers) {
+    this.firstname = registeredUsers.firstname
+    this.surname = registeredUsers.surname
+    this.email = registeredUsers.email
+    this.password = registeredUsers.password
+    this.date = registeredUsers.date
   }
   putMovieOnwatch(MovieSource, imdbID) {
-    const movie = new Movie(MovieSource, imdbID).saveMovie()
+    //
+    const movie = new Movie(MovieSource, imdbID).save()
     this.watch.push(movie)
     return movie
   }
@@ -28,7 +29,7 @@ class User {
     return `Removed from watch-list '${chalk.green(removedMovie.Title)}'`
   }
   putMovieOnwatched(MovieSource, imdbID) {
-    const movie = new Movie(MovieSource, imdbID).saveMovie()
+    const movie = new Movie(MovieSource, imdbID).save()
     this.watched.push(movie)
     return movie
   }

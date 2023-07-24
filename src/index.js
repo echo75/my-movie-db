@@ -8,8 +8,8 @@ const JSONReader = require('./Jsonreader.js')
 // use JSONReader to read the USER json file
 const filePathUsers = './src/user.json'
 const jsonReaderUsers = new JSONReader(filePathUsers)
-const assocArrayUser = jsonReaderUsers.readJSON()
-//console.log(assocArrayUser)
+const registeredUsers = jsonReaderUsers.readJSON()
+//console.log(registeredUsers)
 
 // use JSONReader to read the MOVIES json file
 const filePathMovies = './src/movies_omdb.json'
@@ -17,7 +17,7 @@ const jsonReaderMovies = new JSONReader(filePathMovies)
 const MovieSource = jsonReaderMovies.readJSON()
 //console.log(MovieSource['Search'])
 
-const morgan = new User(assocArrayUser[0])
+const morgan = new User(registeredUsers[0])
 //const jenny = new User(...arrayUser[1])
 
 morgan.putMovieOnwatch(MovieSource, 'tt0385752') // The Golden Compass

@@ -1,13 +1,13 @@
 [
   {
-    "forename": "Morgan",
+    "firstname": "Morgan",
     "surname": "Lindgren",
     "email": "johan@hedman.de",
     "password": "Df1234PWD",
     "date": "2023-07-17"
   },
   {
-    "forename": "Jenny",
+    "firstname": "Jenny",
     "surname": "Karlsson",
     "email": "johan.hedman@echoload.com",
     "password": "GtABcPWD",

@@ -4,15 +4,14 @@ class Movie {
     this.MovieSource = MovieSource
   }
 
-  saveMovie() {
-    let entry = null
+  save() {
     for (const movie of this.MovieSource.Search) {
       if (movie.imdbID === this.givenMovieId) {
-        entry = movie
-        break // Found the entry, no need to continue searching
+        return movie
       }
     }
-    return entry
+    // If the loop completes without finding a movie, throw an exception
+    throw new Error('Movie not found with the given ID')
   }
 }
 
