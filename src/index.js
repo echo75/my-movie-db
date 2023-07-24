@@ -3,7 +3,7 @@ const User = require('./User.js')
 const Movie = require('./Movie.js')
 const Review = require('./Review.js')
 const Rating = require('./Rating.js')
-const JSONReader = require('./json-reader.js')
+const JSONReader = require('./Jsonreader.js')
 
 // use JSONReader to read the USER json file
 const filePathUsers = './src/user.json'
