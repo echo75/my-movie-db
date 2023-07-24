@@ -3,19 +3,18 @@ const User = require('./User.js')
 const Movie = require('./Movie.js')
 const Review = require('./Review.js')
 const Rating = require('./Rating.js')
+const JSONReader = require('./source/json-reader.js')
 
-// use fs to read the USER json file
-const dataUser = fs.readFileSync('./src/user.json', 'utf8')
-// parse the data to get an array of objects
-const assocArrayUser = JSON.parse(dataUser)
-//const arrayUser = assocArrayUser.map(item => Object.values(item)) //convert the assoc array to a numeric array
+// use JSONReader to read the USER json file
+const filePathUsers = './src/user.json'
+const jsonReaderUsers = new JSONReader(filePathUsers)
+const assocArrayUser = jsonReaderUsers.readJSON()
+//console.log(assocArrayUser)
 
-// use fs to read the MOVIES json file
-const dataMovie = fs.readFileSync('./src/movies_omdb.json', 'utf8')
-// parse the data to get an array of objects
-const MovieSource = JSON.parse(dataMovie)
-const arrayMovie = MovieSource['Search'].map(item => Object.values(item)) //convert the assoc array to a numeric array
-
+// use JSONReader to read the MOVIES json file
+const filePathMovies = './src/movies_omdb.json'
+const jsonReaderMovies = new JSONReader(filePathMovies)
+const MovieSource = jsonReaderMovies.readJSON()
 //console.log(MovieSource['Search'])
 
 const morgan = new User(assocArrayUser[0])
