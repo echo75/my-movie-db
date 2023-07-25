@@ -1,6 +1,53 @@
-@startuml Person 
-class Person {
-  name: string
-  age: number
+@startuml MyOMDb
+class User {
+    id: int
+    firstname: string
+    surname: string
+    email: string
+    password: string
+    registration_date: date
+    register(email, password): void
+    login(email, password): boolean
+    resetPassword(new_password): void
+    putMovieOnWatch(MovieSource, imdbID): void
+    removeMovieFromWatch(MovieSource, imdbID): void
+    putMovieOnWatched(MovieSource, imdbID): void
+    removeMovieFromWatched(MovieSource, imdbID): void
+    Rating(rating, imdbID, userId): void
+    Review(review, imdbID, userId): void
 }
+
+class Watchlist {
+    id: int
+    imdbID: string
+    titel: string
+    year: date
+    poster: string
+    type: string
+}
+
+class Watchedlist {
+    id: int
+    imdbID: string
+    titel: string
+    year: date
+    poster: string
+    type: string
+}
+
+class Review {
+    userID: int
+    imdbID: string
+    review: text
+}
+
+class Rating {
+    userID: int
+    imdbID: string
+    rating: int
+}
+User --> Watchlist
+User --> Watchedlist
+User --> Review
+User --> Rating
 @enduml
