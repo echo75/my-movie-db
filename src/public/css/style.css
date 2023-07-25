@@ -1,0 +1,12 @@
+body {
+  margin: 50px;
+  font: 14px Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00bbdd;
+}
+
+#error h2 {
+  color: red;
+}
