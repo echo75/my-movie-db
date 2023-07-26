@@ -1,6 +1,6 @@
-const Movie = require('./Movie.js')
-const Review = require('./Review.js')
-const Rating = require('./Rating.js')
+const Movie = require('./movie.js')
+const Review = require('./review.js')
+const Rating = require('./rating.js')
 const chalk = require('chalk')
 
 class User {
@@ -39,12 +39,12 @@ class User {
     const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
     return `Removed from watched-list '${chalk.green(removedMovie.Title)}'`
   }
-  Rating(rating, imdbID, userId) {
+  rate(rating, imdbID, userId) {
     const movierating = new Rating(rating, imdbID, userId)
     this.rating.push(movierating)
     return movierating
   }
-  Review(review, imdbID, userId) {
+  review(review, imdbID, userId) {
     const moviereview = new Review(review, imdbID, userId)
     this.review.push(moviereview)
     return moviereview

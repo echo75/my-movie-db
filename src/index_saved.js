@@ -1,10 +1,10 @@
 const fs = require('fs')
-const User = require('./User.js')
-const Movie = require('./Movie.js')
-const Review = require('./Review.js')
-const Rating = require('./Rating.js')
-const JSONReader = require('./Jsonreader.js')
-const Test = require('./Test.js')
+const User = require('./user.js')
+const Movie = require('./movie.js')
+const Review = require('./review.js')
+const Rating = require('./rating.js')
+const JSONReader = require('./jsonreader.js')
+const Test = require('./test.js')
 
 // use JSONReader to read the USER json file
 const filePathUsers = './src/source/user.json'
@@ -21,5 +21,5 @@ const MovieSource = jsonReaderMovies.readJSON()
 const test = new Test(registeredUsers, MovieSource)
 test.run()
 
-//const morgan = new User(registeredUsers[0])
+const morgan = new User(registeredUsers[0])
 //const jenny = new User(...arrayUser[1])

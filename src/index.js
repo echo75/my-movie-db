@@ -1,10 +1,10 @@
 const fs = require('fs')
-const User = require('./User.js')
-const Movie = require('./Movie.js')
-const Review = require('./Review.js')
-const Rating = require('./Rating.js')
-const JSONReader = require('./Jsonreader.js')
-const Test = require('./Test.js')
+const User = require('./user.js')
+const Movie = require('./movie.js')
+const Review = require('./review.js')
+const Rating = require('./rating.js')
+const JSONReader = require('./jsonreader.js')
+const Test = require('./test.js')
 const axios = require('axios')
 
 async function main() {
