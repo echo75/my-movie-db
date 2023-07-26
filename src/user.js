@@ -44,7 +44,7 @@ class User {
     this.rating.push(movierating)
     return movierating
   }
-  review(review, imdbID, userId) {
+  writeReview(review, imdbID, userId) {
     const moviereview = new Review(review, imdbID, userId)
     this.review.push(moviereview)
     return moviereview

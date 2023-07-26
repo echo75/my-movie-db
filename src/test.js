@@ -1,7 +1,7 @@
 const User = require('./user.js')
-const Movie = require('./movie.js')
-const Review = require('./review.js')
-const Rating = require('./rating.js')
+// const Movie = require('./movie.js')
+// const Review = require('./review.js')
+// const Rating = require('./rating.js')
 
 class Test {
   constructor(registeredUsers, MovieSource) {
@@ -22,7 +22,7 @@ class Test {
     console.log(morgan.removeMovieFromWatched(this.MovieSource, 'tt0071807')) // The man with the golden gun - remove from watched
     morgan.rate(9, 'tt0091129', 1) // rate the movie with id 1, rating 9, imdbID 6, userId 1
     morgan.rate(3, 'tt0071807', 1) // rate the movie with id 1, rating 9, imdbID 6, userId 1
-    morgan.review('"The Golden Child" is a great movie', 'tt0091129', 1) // review 'This is a great movie', imdbID: tt0091129 , userId 1
+    morgan.writeReview('"The Golden Child" is a great movie', 'tt0091129', 1) // review 'This is a great movie', imdbID: tt0091129 , userId 1
     console.log(morgan)
   }
 }
