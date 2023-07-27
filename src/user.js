@@ -10,6 +10,7 @@ class User {
   reviews = []
 
   constructor(registeredUsers) {
+    this.userId = registeredUsers.userId
     this.firstname = registeredUsers.firstname
     this.surname = registeredUsers.surname
     this.email = registeredUsers.email
@@ -18,26 +19,28 @@ class User {
   }
   putWatch(movieSource, imdbID) {
     //
-    const movie = new Movie(movieSource, imdbID).save()
+    const movie = new Movie(movieSource, imdbID, this.userId).save()
     this.watch.push(movie)
     return movie
   }
   removeWatch(movieSource, imdbID) {
-    this.watch = this.watch.filter(movieSource => movieSource.imdbID !== imdbID)
+    const filterMovies = this.watch.filter(watch => watch.userId === this.userId) // filter movies by userId
+    const removeMovie = filterMovies.find(movie => movie.imdbID === imdbID) // find movie by imdbID
+    this.watch = filterMovies.filter(watch => watch.imdbID !== imdbID)
     // redundant code - just for display purposes:
-    const removedMovie = movieSource.Search.find(movie => movie.imdbID === imdbID)
-    return `Removed from watch-list '${chalk.green(removedMovie.Title)}'`
+    return `Removed from watch-list '${chalk.green(removeMovie.Title)}'`
   }
   putWatched(movieSource, imdbID) {
-    const movie = new Movie(movieSource, imdbID).save()
+    const movie = new Movie(movieSource, imdbID, this.userId).save()
     this.watched.push(movie)
     return movie
   }
   removeWatched(movieSource, imdbID) {
-    this.watched = this.watched.filter(movieSource => movieSource.imdbID !== imdbID)
+    const filterMovies = this.watched.filter(watched => watched.userId === this.userId) // filter movies by userId
+    const removeMovie = filterMovies.find(movie => movie.imdbID === imdbID) // find movie by imdbID
+    this.watched = filterMovies.filter(watched => watched.imdbID !== imdbID)
     // redundant code - just for display purposes:
-    const removedMovie = movieSource.Search.find(movie => movie.imdbID === imdbID)
-    return `Removed from watched-list '${chalk.green(removedMovie.Title)}'`
+    return `Removed from watched-list '${chalk.green(removeMovie.Title)}'`
   }
   rate(rating, imdbID, userId) {
     const movieRating = new Rating(rating, imdbID, userId)
@@ -74,7 +77,12 @@ class User {
     const result =
       filteredReviews.length === 0
         ? 'No reviews for this movie'
-        : filteredReviews.map((element, index) => `${index + 1}. ${element.text} (${element.imdbID})`).join('\n')
+        : filteredReviews
+            .map(
+              (element, index) =>
+                `${index + 1}. ${element.text} -> Movie:(${element.imdbID}), says User: ${element.userId}`
+            )
+            .join('\n')
     return `--- Review-List ---\n${result}\n`
   }
 
@@ -82,7 +90,9 @@ class User {
     const result =
       this.watch === 0
         ? 'No movies are put on the watch-list'
-        : this.watch.map((element, index) => `${index + 1}. ${element.Title} (${element.Year})\n`).join('\n')
+        : this.watch
+            .map((element, index) => `${index + 1}. ${element.Title} (${element.Year}) (Userid: ${element.userId})`)
+            .join('\n')
     return `--- Watch-List ---\n${result}\n`
   }
 
@@ -90,7 +100,9 @@ class User {
     const result =
       this.watched === 0
         ? 'No movies are put on the watched-list'
-        : this.watched.map((element, index) => `${index + 1}. ${element.Title} (${element.Year})`).join('\n')
+        : this.watched
+            .map((element, index) => `${index + 1}. ${element.Title} (${element.Year}) (Userid: ${element.userId})`)
+            .join('\n')
     return `--- Watched-List ---\n${result}\n`
   }
 }

@@ -1,5 +1,6 @@
 [
   {
+    "userId": "1",
     "firstname": "Morgan",
     "surname": "Lindgren",
     "email": "johan@hedman.de",
@@ -7,6 +8,7 @@
     "date": "2023-07-17"
   },
   {
+    "userId": "2",
     "firstname": "Jenny",
     "surname": "Karlsson",
     "email": "johan.hedman@echoload.com",
