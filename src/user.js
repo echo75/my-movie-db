@@ -6,8 +6,8 @@ const chalk = require('chalk')
 class User {
   watch = []
   watched = []
-  rating = []
-  review = []
+  ratings = []
+  reviews = []
 
   constructor(registeredUsers) {
     this.firstname = registeredUsers.firstname
@@ -16,38 +16,38 @@ class User {
     this.password = registeredUsers.password
     this.date = registeredUsers.date
   }
-  putMovieOnWatch(MovieSource, imdbID) {
+  putWatch(movieSource, imdbID) {
     //
-    const movie = new Movie(MovieSource, imdbID).save()
+    const movie = new Movie(movieSource, imdbID).save()
     this.watch.push(movie)
     return movie
   }
-  removeMovieFromWatch(MovieSource, imdbID) {
-    this.watch = this.watch.filter(MovieSource => MovieSource.imdbID !== imdbID)
+  removeWatch(movieSource, imdbID) {
+    this.watch = this.watch.filter(movieSource => movieSource.imdbID !== imdbID)
     // redundant code - just for display purposes:
-    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
+    const removedMovie = movieSource.Search.find(movie => movie.imdbID === imdbID)
     return `Removed from watch-list '${chalk.green(removedMovie.Title)}'`
   }
-  putMovieOnWatched(MovieSource, imdbID) {
-    const movie = new Movie(MovieSource, imdbID).save()
+  putWatched(movieSource, imdbID) {
+    const movie = new Movie(movieSource, imdbID).save()
     this.watched.push(movie)
     return movie
   }
-  removeMovieFromWatched(MovieSource, imdbID) {
-    this.watched = this.watched.filter(MovieSource => MovieSource.imdbID !== imdbID)
+  removeWatched(movieSource, imdbID) {
+    this.watched = this.watched.filter(movieSource => movieSource.imdbID !== imdbID)
     // redundant code - just for display purposes:
-    const removedMovie = MovieSource.Search.find(movie => movie.imdbID === imdbID)
+    const removedMovie = movieSource.Search.find(movie => movie.imdbID === imdbID)
     return `Removed from watched-list '${chalk.green(removedMovie.Title)}'`
   }
   rate(rating, imdbID, userId) {
-    const movierating = new Rating(rating, imdbID, userId)
-    this.rating.push(movierating)
-    return movierating
+    const movieRating = new Rating(rating, imdbID, userId)
+    this.ratings.push(movieRating)
+    return movieRating
   }
-  writeReview(review, imdbID, userId) {
-    const moviereview = new Review(review, imdbID, userId)
-    this.review.push(moviereview)
-    return moviereview
+  review(text, imdbID, userId) {
+    const movieReview = new Review(text, imdbID, userId)
+    this.reviews.push(movieReview)
+    return movieReview
   }
 }
 

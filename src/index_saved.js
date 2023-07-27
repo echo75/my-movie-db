@@ -15,10 +15,10 @@ const registeredUsers = jsonReaderUsers.readJSON()
 // use JSONReader to read the MOVIES json file
 const filePathMovies = './src/source/movies_omdb.json'
 const jsonReaderMovies = new JSONReader(filePathMovies)
-const MovieSource = jsonReaderMovies.readJSON()
-//console.log(MovieSource['Search'])
+const movieSource = jsonReaderMovies.readJSON()
+//console.log(movieSource['Search'])
 
-const test = new Test(registeredUsers, MovieSource)
+const test = new Test(registeredUsers, movieSource)
 test.run()
 
 const morgan = new User(registeredUsers[0])

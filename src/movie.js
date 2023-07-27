@@ -1,11 +1,11 @@
 class Movie {
-  constructor(MovieSource, imdbID) {
+  constructor(movieSource, imdbID) {
     this.givenMovieId = imdbID
-    this.MovieSource = MovieSource
+    this.movieSource = movieSource
   }
 
   save() {
-    for (const movie of this.MovieSource.Search) {
+    for (const movie of this.movieSource.Search) {
       if (movie.imdbID === this.givenMovieId) {
         return movie
       }

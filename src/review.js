@@ -1,6 +1,6 @@
 class Review {
-  constructor(review, imdbID, userId) {
-    this.review = review
+  constructor(text, imdbID, userId) {
+    this.text = text
     this.imdbID = imdbID
     this.userId = userId
   }

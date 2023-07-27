@@ -9,10 +9,10 @@ class User {
     register(email, password): void
     login(email, password): boolean
     resetPassword(new_password): void
-    putMovieOnWatch(MovieSource, imdbID): void
-    removeMovieFromWatch(MovieSource, imdbID): void
-    putMovieOnWatched(MovieSource, imdbID): void
-    removeMovieFromWatched(MovieSource, imdbID): void
+    putMovieOnWatch(movieSource, imdbID): void
+    removeMovieFromWatch(movieSource, imdbID): void
+    putMovieOnWatched(movieSource, imdbID): void
+    removeMovieFromWatched(movieSource, imdbID): void
     Rating(rating, imdbID, userId): void
     Review(review, imdbID, userId): void
 }
