@@ -23,7 +23,7 @@ class User {
     this.watch.push(movie)
     return movie
   }
-  removeWatch(movieSource, imdbID) {
+  removeWatch(imdbID) {
     const filterMovies = this.watch.filter(watch => watch.userId === this.userId) // filter movies by userId
     const removeMovie = filterMovies.find(movie => movie.imdbID === imdbID) // find movie by imdbID
     this.watch = filterMovies.filter(watch => watch.imdbID !== imdbID)
@@ -35,7 +35,7 @@ class User {
     this.watched.push(movie)
     return movie
   }
-  removeWatched(movieSource, imdbID) {
+  removeWatched(imdbID) {
     const filterMovies = this.watched.filter(watched => watched.userId === this.userId) // filter movies by userId
     const removeMovie = filterMovies.find(movie => movie.imdbID === imdbID) // find movie by imdbID
     this.watched = filterMovies.filter(watched => watched.imdbID !== imdbID)
