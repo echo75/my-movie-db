@@ -1,20 +1,29 @@
 const fs = require('fs')
-const User = require('./user.js')
-const Movie = require('./movie.js')
-const Review = require('./review.js')
-const Rating = require('./rating.js')
-const JSONReader = require('./jsonreader.js')
-const Test = require('./test.js')
+const User = require('./models/user.js')
+const Movie = require('./models/movie.js')
+const Review = require('./models/review.js')
+const Rating = require('./models/rating.js')
+const JSONReader = require('./models/jsonreader.js')
+const Test = require('./models/test.js')
 const axios = require('axios')
 
+axios.defaults.baseURL = 'http://localhost:3000'
+
 async function main() {
-  try {
-    const response = await axios.get('http://localhost:3000/index')
-    const data = response.data
-    console.log('Response from the server:', data.title)
-  } catch (error) {
-    console.error('Error fetching data:', error.message)
-  }
+  const response = await axios.get('/')
+  const data = response.data
+  console.log('Response from the server:', data.title)
+  const jenny = await axios.post('/users', {
+    firstname: 'Jenny',
+    surname: 'Smith',
+  })
+  const morgan_ = await axios.post('/users', {
+    firstname: 'Morgan',
+    surname: 'Karlsson',
+  })
+  console.log('User Jenny:', jenny.data)
+  const allUsers = await axios.get('/users')
+  console.log('All users:', allUsers.data)
 }
 
 main()

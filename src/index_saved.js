@@ -1,10 +1,10 @@
 const fs = require('fs')
-const User = require('./user.js')
-const Movie = require('./movie.js')
-const Review = require('./review.js')
-const Rating = require('./rating.js')
-const JSONReader = require('./jsonreader.js')
-const Test = require('./test.js')
+const User = require('./models/user.js')
+const Movie = require('./models/movie.js')
+const Review = require('./models/review.js')
+const Rating = require('./models/rating.js')
+const JSONReader = require('./models/jsonreader.js')
+const Test = require('./models/test.js')
 
 // use JSONReader to read the USER json file
 const filePathUsers = './src/source/user.json'

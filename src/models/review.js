@@ -1,8 +1,8 @@
 class Review {
-  constructor(text, imdbID, userId) {
+  constructor(text, imdbID, creator) {
     this.text = text
     this.imdbID = imdbID
-    this.userId = userId
+    this.creator = creator
   }
 }
 
