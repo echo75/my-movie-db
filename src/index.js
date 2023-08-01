@@ -7,12 +7,19 @@ const JSONReader = require('./models/jsonreader.js')
 const Test = require('./models/test.js')
 const axios = require('axios')
 
+// use JSONReader to read the MOVIES json file
+const filePathMovies = './src/source/movies_omdb.json'
+const jsonReaderMovies = new JSONReader(filePathMovies)
+const movieSource = jsonReaderMovies.readJSON()
+//console.log(movieSource['Search'])
+
 axios.defaults.baseURL = 'http://localhost:3000'
 
 async function main() {
-  const response = await axios.get('/')
-  const data = response.data
-  console.log('Response from the server:', data.title)
+  // const response = await axios.get('/')
+  // const data = response.data
+  // console.log('Response from the server:', data.title)
+
   const jenny = await axios.post('/users', {
     firstname: 'Jenny',
     surname: 'Smith',
@@ -21,7 +28,21 @@ async function main() {
     firstname: 'Morgan',
     surname: 'Karlsson',
   })
-  console.log('User Jenny:', jenny.data)
+
+  const movieToWatchList = await axios.post('/users/Jenny/watchlist', {
+    movieSource: movieSource,
+    imdbID: 'tt0385752',
+  })
+
+  const movieToWatchedList = await axios.post('/users/Jenny/watchedlist', {
+    movie: movieToWatchList.data,
+    imdbID: 'tt0385752',
+  })
+
+  const deleteMovieFromWatchedList = await axios.delete('/users/Jenny/watchedlist/tt0385752')
+
+  //console.log('User Jenny:', jenny.data)
+  // console.log('Jennys watchlist:', movieToWatchList.data)
   const allUsers = await axios.get('/users')
   console.log('All users:', allUsers.data)
 }

@@ -24,15 +24,16 @@ class User {
     const removeMovie = this.watch.find(movie => movie.imdbID === imdbID) // find movie by imdbID
     this.watch = this.watch.filter(watch => watch.imdbID !== imdbID)
     // redundant code - just for display purposes:
-    return `Removed from watch-list '${chalk.green(removeMovie.Title)}'`
+    //return `Removed from watch-list '${chalk.green(removeMovie.Title)}'`
   }
-  putWatched(movieSource, imdbID) {
-    const movie = new Movie(movieSource, imdbID).save()
+  putWatched(imdbID) {
+    const movie = this.watch.find(film => film.imdbID === imdbID)
+    if (!movie) throw new Error('Movie not found on the watchlist with the given ID')
     this.watched.push(movie)
+    this.removeWatch(imdbID)
     return movie
   }
   removeWatched(imdbID) {
-    //const filterMovies = this.watched.filter(watched => watched.userId === this.userId) // filter movies by userId
     const removeMovie = this.watched.find(movie => movie.imdbID === imdbID) // find movie by imdbID
     this.watched = this.watched.filter(watched => watched.imdbID !== imdbID)
     // redundant code - just for display purposes:

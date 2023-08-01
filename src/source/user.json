@@ -2,17 +2,11 @@
   {
     "userId": "1",
     "firstname": "Morgan",
-    "surname": "Lindgren",
-    "email": "johan@hedman.de",
-    "password": "Df1234PWD",
-    "date": "2023-07-17"
+    "surname": "Lindgren"
   },
   {
     "userId": "2",
     "firstname": "Jenny",
-    "surname": "Karlsson",
-    "email": "johan.hedman@echoload.com",
-    "password": "GtABcPWD",
-    "date": "2023-07-17"
+    "surname": "Karlsson"
   }
 ]
