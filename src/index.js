@@ -34,17 +34,17 @@ async function main() {
     imdbID: 'tt0385752',
   })
 
-  const movieToWatchedList = await axios.post('/users/Jenny/watchedlist', {
-    movie: movieToWatchList.data,
-    imdbID: 'tt0385752',
-  })
+  //   const movieToWatchedList = await axios.post('/users/Jenny/watchedlist', {
+  //     movie: movieToWatchList.data,
+  //     imdbID: 'tt0385752',
+  //   })
 
-  const deleteMovieFromWatchedList = await axios.delete('/users/Jenny/watchedlist/tt0385752')
+  //   const deleteMovieFromWatchedList = await axios.delete('/users/Jenny/watchedlist/tt0385752')
 
-  //console.log('User Jenny:', jenny.data)
-  // console.log('Jennys watchlist:', movieToWatchList.data)
-  const allUsers = await axios.get('/users')
-  console.log('All users:', allUsers.data)
+  //   //console.log('User Jenny:', jenny.data)
+  console.log('Jennys watchlist:', movieToWatchList.data)
+  //   const allUsers = await axios.get('/users')
+  //   console.log('All users:', allUsers.data)
 }
 
 main()

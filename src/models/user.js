@@ -2,6 +2,18 @@ const Movie = require('./movie.js')
 const Review = require('./review.js')
 const Rating = require('./rating.js')
 const chalk = require('chalk')
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+  firstName: String,
+  surName: String,
+  watch: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
+  watched: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
+  ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+})
+
+module.exports = mongoose.model('User', userSchema)
 
 class User {
   watch = []
@@ -105,12 +117,12 @@ class User {
     return `--- Watched-List ---\n${result}\n`
   }
 
-  static create({ firstname, surname }) {
-    const newUser = new User({ firstname, surname })
-    User.list.push(newUser)
-    return newUser
-  }
-  static list = []
+  // static create({ firstname, surname }) {
+  //   const newUser = new User({ firstname, surname })
+  //   User.list.push(newUser)
+  //   return newUser
+  // }
+  // static list = []
 }
 
-module.exports = User
+//module.exports = User
