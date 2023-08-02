@@ -20,6 +20,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+require('dotenv').config()
+require('./database-connection')
+
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/movies', usersMovies)
@@ -39,5 +42,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
+
+console.log('app.js is running')
 
 module.exports = app

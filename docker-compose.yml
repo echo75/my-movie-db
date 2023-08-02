@@ -1,0 +1,14 @@
+services:
+  api:
+    image: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    environment:
+      - APP_NAME=api
+    volumes:
+      - ./src:/app/src
