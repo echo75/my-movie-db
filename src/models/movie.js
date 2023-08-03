@@ -1,19 +1,11 @@
-class Movie {
-  constructor(movieSource, imdbID, firstName) {
-    this.givenMovieId = imdbID
-    this.movieSource = movieSource
-    this.firstName = firstName
-  }
+const mongoose = require('mongoose')
 
-  save() {
-    for (const movie of this.movieSource.Search) {
-      if (movie.imdbID === this.givenMovieId) {
-        return movie
-      }
-    }
-    // If the loop completes without finding a movie, throw an exception
-    throw new Error('Movie not found with the given ID')
-  }
-}
+const movieSchema = new mongoose.Schema({
+  Title: String,
+  Year: String,
+  imdbID: String,
+  Type: String,
+  Poster: String,
+})
 
-module.exports = Movie
+module.exports = mongoose.model('Movie', movieSchema)

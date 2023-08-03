@@ -13,10 +13,10 @@ router.get('/', async function (req, res, next) {
 // })
 
 //create new user
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
   try {
     console.log(req.body)
-    const user = User.create({
+    const user = await User.create({
       firstName: req.body.firstname,
       surName: req.body.surname,
     })
@@ -27,27 +27,29 @@ router.post('/', function (req, res, next) {
 })
 
 // user/:id/watchlist
-router.post('/:id/watchlist', function (req, res, next) {
-  try {
-    const user = User.list.find(user => user.firstName === req.params.id)
-    const movie = user.putWatch(req.body.movieSource, req.body.imdbID)
-    res.send(movie)
-  } catch (error) {
-    res.send(error.message)
-  }
-})
-
-// user/:id/watchlist
-// router.post('/:id/watchlist', async function (req, res, next) {
+// router.post('/:id/watchlist', function (req, res, next) {
 //   try {
-//     const user = await User.find({ firstName: req.params.id })
-//     //(user => user.firstName === req.params.id)
-//     const movie = user.putWatch(movieSource, req.body.imdbID)
+//     const user = User.list.find(user => user.firstName === req.params.id)
+//     const movie = user.putWatch(req.body.movieSource, req.body.imdbID)
 //     res.send(movie)
 //   } catch (error) {
 //     res.send(error.message)
 //   }
 // })
+
+// user/:id/watchlist
+router.post('/:id/watchlist', async function (req, res, next) {
+  try {
+    const user = await User.findOne({ firstName: req.params.id })
+    //(user => user.firstName === req.params.id)
+    console.log(user)
+
+    const movie = await user.putWatch(req.body.movieSource, req.body.imdbID) // This is not the class User, but the array of one user, putWatch is not a metohd of the array
+    res.send(movie)
+  } catch (error) {
+    res.send(error.message)
+  }
+})
 
 // user/:id/watchedlist
 router.post('/:id/watchedlist', function (req, res, next) {

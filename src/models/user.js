@@ -1,6 +1,7 @@
 const Movie = require('./movie.js')
 const Review = require('./review.js')
 const Rating = require('./rating.js')
+const MovieExtract = require('./movieExtract.js')
 const chalk = require('chalk')
 const mongoose = require('mongoose')
 
@@ -13,8 +14,6 @@ const userSchema = new mongoose.Schema({
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 })
 
-module.exports = mongoose.model('User', userSchema)
-
 class User {
   watch = []
   watched = []
@@ -25,11 +24,12 @@ class User {
     this.firstName = registeredUsers.firstname
     this.surName = registeredUsers.surname
   }
-  putWatch(movieSource, imdbID) {
-    //
-    const movie = new Movie(movieSource, imdbID).save()
-    this.watch.push(movie)
-    return movie
+  async putWatch(movieSource, imdbID) {
+    const movie = new MovieExtract(movieSource, imdbID).save()
+    const oneMovie = await Movie.create({ ...movie })
+    this.watch.push(oneMovie)
+    await this.save()
+    return oneMovie
   }
   removeWatch(imdbID) {
     //const filterMovies = this.watch.filter(watch => watch.userId === this.userId) // filter movies by userId
@@ -125,4 +125,6 @@ class User {
   // static list = []
 }
 
+userSchema.loadClass(User)
+module.exports = mongoose.model('User', userSchema)
 //module.exports = User
