@@ -1,14 +1,18 @@
-# Base image
 FROM node:alpine
 
-# Working directory
 WORKDIR /app
 
-# Copy app to working directory
-COPY . .
+# install nodemon as a global package
+RUN npm install -g nodemon
 
+# add package.json and package-lock.json to the container
+ADD package.json package-lock.json ./
 # Install dependencies
 RUN npm install
 
-# Default command
-CMD ["npm", "start"]
+# Add the rest of the files
+ADD bin ./bin
+ADD src ./src
+
+# Run the app
+CMD [ "nodemon" ]

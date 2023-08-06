@@ -1,9 +1,8 @@
+const mongoose = require('mongoose')
 const Movie = require('./movie.js')
 const Review = require('./review.js')
 const Rating = require('./rating.js')
-const MovieExtract = require('./movieExtract.js')
 const chalk = require('chalk')
-const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
   firstName: String,
@@ -24,19 +23,15 @@ class User {
     this.firstName = registeredUsers.firstname
     this.surName = registeredUsers.surname
   }
-  async putWatch(movieSource, imdbID) {
-    const movie = new MovieExtract(movieSource, imdbID).save()
-    const oneMovie = await Movie.create({ ...movie })
-    this.watch.push(oneMovie)
+  async putWatch(movie) {
+    const newMovie = await Movie.create({ ...movie })
+    this.watch.push(newMovie)
     await this.save()
-    return oneMovie
+    return newMovie
   }
-  removeWatch(imdbID) {
-    //const filterMovies = this.watch.filter(watch => watch.userId === this.userId) // filter movies by userId
-    const removeMovie = this.watch.find(movie => movie.imdbID === imdbID) // find movie by imdbID
-    this.watch = this.watch.filter(watch => watch.imdbID !== imdbID)
-    // redundant code - just for display purposes:
-    //return `Removed from watch-list '${chalk.green(removeMovie.Title)}'`
+  async removeWatch(movie) {
+    this.watch.pull(movie)
+    await this.save()
   }
   putWatched(imdbID) {
     const movie = this.watch.find(film => film.imdbID === imdbID)
@@ -48,8 +43,6 @@ class User {
   removeWatched(imdbID) {
     const removeMovie = this.watched.find(movie => movie.imdbID === imdbID) // find movie by imdbID
     this.watched = this.watched.filter(watched => watched.imdbID !== imdbID)
-    // redundant code - just for display purposes:
-    return `Removed from watched-list '${chalk.green(removeMovie.Title)}'`
   }
   rate(rating, imdbID) {
     const movieRating = new Rating(rating, imdbID, this.firstName)

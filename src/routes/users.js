@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const Movie = require('../models/movie')
 const router = express.Router()
 
 /* GET users listing. */
@@ -44,7 +45,7 @@ router.post('/:id/watchlist', async function (req, res, next) {
     //(user => user.firstName === req.params.id)
     console.log(user)
 
-    const movie = await user.putWatch(req.body.movieSource, req.body.imdbID) // This is not the class User, but the array of one user, putWatch is not a metohd of the array
+    const movie = await user.putWatch(req.body.movie)
     res.send(movie)
   } catch (error) {
     res.send(error.message)
@@ -57,6 +58,18 @@ router.post('/:id/watchedlist', function (req, res, next) {
     const user = User.list.find(user => user.firstName === req.params.id)
     const movie = user.putWatched(req.body.imdbID)
     res.send(movie)
+  } catch (error) {
+    res.send(error.message)
+  }
+})
+
+// delete movie from watchlist
+router.delete('/:id/watchlist/:imdbID', async function (req, res, next) {
+  try {
+    const user = await User.findOne({ firstName: req.params.id }) // findbyid
+    const movie = await Movie.findOne({ imdbID: req.params.imdbID }) // findbyid
+    user.removeWatch(movie)
+    res.sendStatus(200)
   } catch (error) {
     res.send(error.message)
   }
