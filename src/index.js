@@ -2,7 +2,7 @@ const User = require('./models/user.js')
 const Movie = require('./models/movie.js')
 const Review = require('./models/review.js')
 const Rating = require('./models/rating.js')
-const Test = require('./models/test.js')
+//const Test = require('./models/test.js')
 const axios = require('axios')
 
 axios.defaults.baseURL = 'http://localhost:3000'
@@ -21,21 +21,36 @@ async function main() {
     surname: 'Karlsson',
   })
   // change to `jenny.data._id` instead of hardcoded id
-  const movieToWatchList = await axios.post('/users/Jenny/watchlist', {
+  await axios.post(`/users/${jenny.data._id}/watchlist`, {
+    movie: movieSource.Search[3],
+  })
+  await axios.post(`/users/${jenny.data._id}/watchlist`, {
     movie: movieSource.Search[0],
   })
 
-  //const deleteMovieFromWatchList = await axios.delete(`/users/Jenny/watchlist/${movieSource.Search[0].imdbID}`)
+  await axios.post(`/users/${jenny.data._id}/watchlist`, {
+    movie: movieSource.Search[1],
+  })
 
-  //   const movieToWatchedList = await axios.post('/users/Jenny/watchedlist', {
-  //     movie: movieToWatchList.data,
-  //     imdbID: 'tt0385752',
-  //   })
+  await axios.post(`/users/${jenny.data._id}/watchlist`, {
+    movie: movieSource.Search[1],
+  })
+  // movieToWatchList = await axios.post(`/users/${morgan_.data._id}/watchlist`, {
+  //   movie: movieSource.Search[1],
+  // })
+
+  // const deleteMovieFromWatchList = await axios.delete(
+  //   `/users/${jenny.data._id}/watchlist/${movieSource.Search[0].imdbID}`
+  // )
+
+  const movieToWatchedList = await axios.post(`/users/${jenny.data._id}/watchedlist`, {
+    movie: movieSource.Search[1],
+  })
 
   //   const deleteMovieFromWatchedList = await axios.delete('/users/Jenny/watchedlist/tt0385752')
 
   //   //console.log('User Jenny:', jenny.data)
-  console.log('Jennys watchlist:', movieToWatchList.data)
+  // console.log('Jennys watchlist:', movieToWatchList.data)
   //   const allUsers = await axios.get('/users')
   //   console.log('All users:', allUsers.data)
 }

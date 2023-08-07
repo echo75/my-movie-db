@@ -41,10 +41,7 @@ router.post('/', async function (req, res, next) {
 // user/:id/watchlist
 router.post('/:id/watchlist', async function (req, res, next) {
   try {
-    const user = await User.findOne({ firstName: req.params.id })
-    //(user => user.firstName === req.params.id)
-    console.log(user)
-
+    const user = await User.findById(req.params.id)
     const movie = await user.putWatch(req.body.movie)
     res.send(movie)
   } catch (error) {
@@ -53,11 +50,12 @@ router.post('/:id/watchlist', async function (req, res, next) {
 })
 
 // user/:id/watchedlist
-router.post('/:id/watchedlist', function (req, res, next) {
+router.post('/:id/watchedlist', async function (req, res, next) {
   try {
-    const user = User.list.find(user => user.firstName === req.params.id)
-    const movie = user.putWatched(req.body.imdbID)
-    res.send(movie)
+    const user = await User.findById(req.params.id)
+    const movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })
+    await user.putWatched(movie)
+    res.send(user)
   } catch (error) {
     res.send(error.message)
   }
@@ -66,7 +64,7 @@ router.post('/:id/watchedlist', function (req, res, next) {
 // delete movie from watchlist
 router.delete('/:id/watchlist/:imdbID', async function (req, res, next) {
   try {
-    const user = await User.findOne({ firstName: req.params.id }) // findbyid
+    const user = await User.findById(req.params.id) // findbyid
     const movie = await Movie.findOne({ imdbID: req.params.imdbID }) // findbyid
     user.removeWatch(movie)
     res.sendStatus(200)

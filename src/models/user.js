@@ -2,12 +2,13 @@ const mongoose = require('mongoose')
 const Movie = require('./movie.js')
 const Review = require('./review.js')
 const Rating = require('./rating.js')
+const autopopulate = require('mongoose-autopopulate')
 const chalk = require('chalk')
 
 const userSchema = new mongoose.Schema({
   firstName: String,
   surName: String,
-  watch: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
+  watch: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie', autopopulate: { maxDepth: 1 } }],
   watched: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
   ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
@@ -24,20 +25,31 @@ class User {
     this.surName = registeredUsers.surname
   }
   async putWatch(movie) {
-    const newMovie = await Movie.create({ ...movie })
-    this.watch.push(newMovie)
+    //check if movie is allredy in watchlist
+    const movieIsInWatch = await Movie.findOne({ imdbID: movie.imdbID })
+    if (movieIsInWatch) {
+      throw new Error('Movie is allready in watchlist')
+    }
+    //find if movie allready in database
+    let movieToWatch = await Movie.findOne({ imdbID: movie.imdbID })
+
+    if (!movieToWatch) {
+      movieToWatch = await Movie.create({ ...movie })
+    }
+    this.watch.push(movieToWatch)
     await this.save()
-    return newMovie
+    return movieToWatch
   }
   async removeWatch(movie) {
     this.watch.pull(movie)
     await this.save()
   }
-  putWatched(imdbID) {
-    const movie = this.watch.find(film => film.imdbID === imdbID)
+  async putWatched(movie) {
+    // TODO check if movie is allredy in watchedlist
+    const MovieToWatched = await Movie.findOne({ imdbID: movie.imdbID })
     if (!movie) throw new Error('Movie not found on the watchlist with the given ID')
-    this.watched.push(movie)
-    this.removeWatch(imdbID)
+    this.watched.push(MovieToWatched)
+    this.removeWatch(movie)
     return movie
   }
   removeWatched(imdbID) {
