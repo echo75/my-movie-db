@@ -40,12 +40,21 @@ router.post('/', async function (req, res, next) {
 
 // user/:id/watchlist
 router.post('/:id/watchlist', async function (req, res, next) {
-  try {
-    const user = await User.findById(req.params.id)
-    const movie = await user.putWatch(req.body.movie)
-    res.send(movie)
-  } catch (error) {
-    res.send(error.message)
+  let movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })
+
+  if (!movie) {
+    movie = await Movie.create({
+      ...req.body.movie,
+    })
+  }
+
+  const user = await User.findById(req.params.id)
+
+  if (user.watch.includes(movie._id)) {
+    res.send('Movie already in watchlist')
+  } else {
+    await user.putWatch(movie)
+    res.send(user)
   }
 })
 
@@ -66,7 +75,7 @@ router.delete('/:id/watchlist/:imdbID', async function (req, res, next) {
   try {
     const user = await User.findById(req.params.id) // findbyid
     const movie = await Movie.findOne({ imdbID: req.params.imdbID }) // findbyid
-    user.removeWatch(movie)
+    await user.removeWatch(movie)
     res.sendStatus(200)
   } catch (error) {
     res.send(error.message)
@@ -74,10 +83,11 @@ router.delete('/:id/watchlist/:imdbID', async function (req, res, next) {
 })
 
 // delete movie from watchedlist
-router.delete('/:id/watchedlist/:imdbID', function (req, res, next) {
+router.delete('/:id/watchedlist/:movieId', async function (req, res, next) {
   try {
-    const user = User.list.find(user => user.firstName === req.params.id)
-    const movie = user.removeWatched(req.params.imdbID)
+    const user = await User.findById(req.params.id)
+    const movie = await Movie.findOne({ imdbID: req.params.movieId })
+    await user.removeWatched(movie)
     res.sendStatus(200)
   } catch (error) {
     res.send(error.message)

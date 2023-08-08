@@ -1,7 +1,6 @@
 const User = require('./models/user.js')
 const Movie = require('./models/movie.js')
 const Review = require('./models/review.js')
-const Rating = require('./models/rating.js')
 //const Test = require('./models/test.js')
 const axios = require('axios')
 
@@ -47,8 +46,9 @@ async function main() {
     movie: movieSource.Search[1],
   })
 
-  //   const deleteMovieFromWatchedList = await axios.delete('/users/Jenny/watchedlist/tt0385752')
-
+  const deleteMovieFromWatchedList = await axios.delete(
+    `/users/${jenny.data._id}/watchedlist/${movieSource.Search[1].imdbID}`
+  )
   //   //console.log('User Jenny:', jenny.data)
   // console.log('Jennys watchlist:', movieToWatchList.data)
   //   const allUsers = await axios.get('/users')

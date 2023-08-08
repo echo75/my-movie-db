@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const Movie = require('./movie.js')
 const Review = require('./review.js')
-const Rating = require('./rating.js')
 const autopopulate = require('mongoose-autopopulate')
 const chalk = require('chalk')
 
@@ -15,30 +14,10 @@ const userSchema = new mongoose.Schema({
 })
 
 class User {
-  watch = []
-  watched = []
-  ratings = []
-  reviews = []
-
-  constructor(registeredUsers) {
-    this.firstName = registeredUsers.firstname
-    this.surName = registeredUsers.surname
-  }
   async putWatch(movie) {
-    //check if movie is allredy in watchlist
-    const movieIsInWatch = await Movie.findOne({ imdbID: movie.imdbID })
-    if (movieIsInWatch) {
-      throw new Error('Movie is allready in watchlist')
-    }
-    //find if movie allready in database
-    let movieToWatch = await Movie.findOne({ imdbID: movie.imdbID })
-
-    if (!movieToWatch) {
-      movieToWatch = await Movie.create({ ...movie })
-    }
-    this.watch.push(movieToWatch)
+    this.watch.push(movie)
     await this.save()
-    return movieToWatch
+    return movie
   }
   async removeWatch(movie) {
     this.watch.pull(movie)
@@ -52,9 +31,9 @@ class User {
     this.removeWatch(movie)
     return movie
   }
-  removeWatched(imdbID) {
-    const removeMovie = this.watched.find(movie => movie.imdbID === imdbID) // find movie by imdbID
-    this.watched = this.watched.filter(watched => watched.imdbID !== imdbID)
+  async removeWatched(movie) {
+    this.watched.pull(movie)
+    await this.save()
   }
   rate(rating, imdbID) {
     const movieRating = new Rating(rating, imdbID, this.firstName)
@@ -121,13 +100,6 @@ class User {
             .join('\n')
     return `--- Watched-List ---\n${result}\n`
   }
-
-  // static create({ firstname, surname }) {
-  //   const newUser = new User({ firstname, surname })
-  //   User.list.push(newUser)
-  //   return newUser
-  // }
-  // static list = []
 }
 
 userSchema.loadClass(User)

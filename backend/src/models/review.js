@@ -1,9 +1,10 @@
-class Review {
-  constructor(text, imdbID, creator) {
-    this.text = text
-    this.imdbID = imdbID
-    this.creator = creator
-  }
-}
+const mongoose = require('mongoose')
 
-module.exports = Review
+const reviewSchema = new mongoose.Schema({
+  text: String,
+  rating: Number,
+  movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+})
+
+module.exports = mongoose.model('Review', reviewSchema)

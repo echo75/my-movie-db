@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI)
 
-console.log('Connecting to MongoDB ...')
+//console.log('Connecting to MongoDB ...')
 
 // const Cat = mongoose.model('Cat', { name: String, date: Date })
 
