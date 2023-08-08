@@ -2,16 +2,31 @@ services:
   api:
     image: api
     build:
-      context: .
+      context: backend
       dockerfile: Dockerfile
     ports:
       - '3000:3000'
     env_file:
-      - .env
+      - ./backend/.env
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
     depends_on:
       - mongo
+
+  frontend:
+    image: movie-app
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - '5173:5173'
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+    depends_on:
+      - api
 
   mongo:
     image: mongo
