@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('../models/user')
 const Movie = require('../models/movie')
+const Review = require('../models/review')
 const router = express.Router()
 
 /* GET users listing. */
@@ -8,10 +9,6 @@ router.get('/', async function (req, res, next) {
   const users = await User.find()
   res.send(users)
 })
-
-// router.get('/', function (req, res, next) {
-//   res.send(User.list)
-// })
 
 //create new user
 router.post('/', async function (req, res, next) {
@@ -27,16 +24,24 @@ router.post('/', async function (req, res, next) {
   }
 })
 
-// user/:id/watchlist
-// router.post('/:id/watchlist', function (req, res, next) {
-//   try {
-//     const user = User.list.find(user => user.firstName === req.params.id)
-//     const movie = user.putWatch(req.body.movieSource, req.body.imdbID)
-//     res.send(movie)
-//   } catch (error) {
-//     res.send(error.message)
-//   }
-// })
+router.post('/:id/reviews/', async function (req, res, next) {
+  try {
+    console.log('-->', req.body)
+    // save review and rating for a single movie
+    const user = await User.findById(req.params.id)
+    const movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })
+    const review = await Review.create({
+      text: req.body.text,
+      rating: req.body.rating,
+      movie: movie,
+      author: user,
+    })
+    await user.review(movie, review)
+    res.send(review)
+  } catch (error) {
+    res.send(error.message)
+  }
+})
 
 // user/:id/watchlist
 router.post('/:id/watchlist', async function (req, res, next) {

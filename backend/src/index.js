@@ -32,8 +32,15 @@ async function main() {
   })
 
   await axios.post(`/users/${jenny.data._id}/watchlist`, {
-    movie: movieSource.Search[1],
+    movie: movieSource.Search[4],
   })
+
+  await axios.post(`/users/${jenny.data._id}/reviews`, {
+    movie: movieSource.Search[4],
+    text: 'Test Review. One of the best movies ever!',
+    rating: 5,
+  })
+
   // movieToWatchList = await axios.post(`/users/${morgan_.data._id}/watchlist`, {
   //   movie: movieSource.Search[1],
   // })
@@ -49,10 +56,6 @@ async function main() {
   // const deleteMovieFromWatchedList = await axios.delete(
   //   `/users/${jenny.data._id}/watchedlist/${movieSource.Search[1].imdbID}`
   // )
-  //   //console.log('User Jenny:', jenny.data)
-  // console.log('Jennys watchlist:', movieToWatchList.data)
-  //   const allUsers = await axios.get('/users')
-  //   console.log('All users:', allUsers.data)
 }
 
 main()

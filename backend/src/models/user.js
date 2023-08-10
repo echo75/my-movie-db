@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Movie = require('./movie.js')
-const Review = require('./review.js')
+const putReview = require('./review.js')
 const autopopulate = require('mongoose-autopopulate')
 const chalk = require('chalk')
 
@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
   surName: String,
   watch: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie', autopopulate: { maxDepth: 1 } }],
   watched: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
-  ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 })
 
@@ -35,15 +34,17 @@ class User {
     this.watched.pull(movie)
     await this.save()
   }
-  rate(rating, imdbID) {
-    const movieRating = new Rating(rating, imdbID, this.firstName)
-    this.ratings.push(movieRating)
-    return movieRating
-  }
-  review(text, imdbID) {
-    const movieReview = new Review(text, imdbID, this.firstName)
-    this.reviews.push(movieReview)
-    return movieReview
+  // rate(rating, imdbID) {
+  //   const movieRating = new Rating(rating, imdbID, this.firstName)
+  //   this.ratings.push(movieRating)
+  //   return movieRating
+  // }
+  async review(movie, review) {
+    this.reviews.push(review)
+    movie.Reviews.push(review)
+    await this.save()
+    await movie.save()
+    return review
   }
 
   //getters here:
