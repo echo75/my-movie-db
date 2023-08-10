@@ -5,9 +5,17 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
+
+import axios from 'axios'
+
+const { data } = await axios.get('http://localhost:3000/users')
 </script>
 
 <template>
+  <h1>Movie DB Users</h1>
+  <ul>
+    <li v-for="user in data" :key="user.id">{{ user.firstName }} {{ user.surName }}</li>
+  </ul>
   <WelcomeItem>
     <template #icon>
       <DocumentationIcon />

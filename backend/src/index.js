@@ -46,9 +46,9 @@ async function main() {
     movie: movieSource.Search[1],
   })
 
-  const deleteMovieFromWatchedList = await axios.delete(
-    `/users/${jenny.data._id}/watchedlist/${movieSource.Search[1].imdbID}`
-  )
+  // const deleteMovieFromWatchedList = await axios.delete(
+  //   `/users/${jenny.data._id}/watchedlist/${movieSource.Search[1].imdbID}`
+  // )
   //   //console.log('User Jenny:', jenny.data)
   // console.log('Jennys watchlist:', movieToWatchList.data)
   //   const allUsers = await axios.get('/users')
