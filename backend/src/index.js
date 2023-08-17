@@ -11,35 +11,49 @@ async function main() {
   // const data = response.data
   // console.log('Response from the server:', data.title)
 
-  const jenny = await axios.post('/users', {
-    firstname: 'Jenny',
-    surname: 'Smith',
-  })
-  const morgan_ = await axios.post('/users', {
-    firstname: 'Morgan',
-    surname: 'Karlsson',
-  })
+  // const jenny = await axios.post('/users', {
+  //   firstname: 'Jenny',
+  //   surname: 'Smith',
+  // })
+  // const morgan_ = await axios.post('/users', {
+  //   firstname: 'Morgan',
+  //   surname: 'Karlsson',
+  // })
   // change to `jenny.data._id` instead of hardcoded id
-  await axios.post(`/users/${jenny.data._id}/watchlist`, {
-    movie: movieSource.Search[3],
-  })
-  await axios.post(`/users/${jenny.data._id}/watchlist`, {
-    movie: movieSource.Search[0],
-  })
+  // await axios.post(`/users/${jenny.data._id}/watchlist`, {
+  //   movie: movieSource.Search[3],
+  // })
+  // await axios.post(`/users/${jenny.data._id}/watchlist`, {
+  //   movie: movieSource.Search[0],
+  // })
 
-  await axios.post(`/users/${jenny.data._id}/watchlist`, {
-    movie: movieSource.Search[1],
-  })
+  // await axios.post(`/users/${jenny.data._id}/watchlist`, {
+  //   movie: movieSource.Search[1],
+  // })
 
-  await axios.post(`/users/${jenny.data._id}/watchlist`, {
-    movie: movieSource.Search[4],
-  })
+  // await axios.post(`/users/${jenny.data._id}/watchlist`, {
+  //   movie: movieSource.Search[4],
+  // })
 
-  await axios.post(`/users/${jenny.data._id}/reviews`, {
-    movie: movieSource.Search[4],
-    text: 'Test Review. One of the best movies ever!',
-    rating: 5,
+  // await axios.post(`/users/${jenny.data._id}/reviews`, {
+  //   movie: movieSource.Search[4],
+  //   text: 'Test Review. One of the best movies ever!',
+  //   rating: 5,
+  // })
+
+  const Johan = await axios.post('/users', {
+    firstName: 'Johan',
+    surName: 'Hedman',
+    email: 'johan@hedman.de',
+    password: '123456',
   })
+  console.log('Johan', Johan.data)
+
+  const loggedin = await axios.post('/accounts/session', {
+    email: 'johan@hedman.de',
+    password: '123456',
+  })
+  console.log('loggedin', loggedin.data)
 
   // movieToWatchList = await axios.post(`/users/${morgan_.data._id}/watchlist`, {
   //   movie: movieSource.Search[1],
@@ -49,9 +63,9 @@ async function main() {
   //   `/users/${jenny.data._id}/watchlist/${movieSource.Search[0].imdbID}`
   // )
 
-  const movieToWatchedList = await axios.post(`/users/${jenny.data._id}/watchedlist`, {
-    movie: movieSource.Search[1],
-  })
+  // const movieToWatchedList = await axios.post(`/users/${jenny.data._id}/watchedlist`, {
+  //   movie: movieSource.Search[1],
+  // })
 
   // const deleteMovieFromWatchedList = await axios.delete(
   //   `/users/${jenny.data._id}/watchedlist/${movieSource.Search[1].imdbID}`

@@ -1,6 +1,34 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    RouterLink,
+    RouterView
+  },
+  data() {
+    user: null
+  },
+  mounted() {
+    this.fetchUser()
+  },
+  methods: {
+    async fetchUser() {
+      try {
+        const response = await axios.get('http://localhost:3000/accounts/session', {
+          withCredentials: true
+        })
+        this.user = response.data
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+}
 </script>
 
 <template>
@@ -13,6 +41,8 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/signup">Sign up</RouterLink>
       </nav>
     </div>
   </header>

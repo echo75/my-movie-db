@@ -6,23 +6,37 @@ const router = express.Router()
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
+  const numberOfCalls = req.session.numberOfCalls || 0
+  console.log('Number of calls: ', numberOfCalls)
+  req.session.numberOfCalls = numberOfCalls + 1
   const users = await User.find()
   res.send(users)
 })
 
 //create new user
+
 router.post('/', async function (req, res, next) {
   try {
-    console.log(req.body)
-    const user = await User.create({
-      firstName: req.body.firstname,
-      surName: req.body.surname,
-    })
+    const { firstName, surName, email, password } = req.body
+    const user = await User.register({ firstName, surName, email }, password)
     res.send(user)
   } catch (error) {
     res.send(error.message)
   }
 })
+
+// router.post('/', async function (req, res, next) {
+//   try {
+//     console.log(req.body)
+//     const user = await User.create({
+//       firstName: req.body.firstname,
+//       surName: req.body.surname,
+//     })
+//     res.send(user)
+//   } catch (error) {
+//     res.send(error.message)
+//   }
+// })
 
 router.post('/:id/reviews/', async function (req, res, next) {
   try {

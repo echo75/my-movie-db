@@ -4,18 +4,57 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+const mongoose = require('mongoose')
+const passport = require('passport')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const usersMovies = require('./routes/movies')
+const accountsRouter = require('./routes/accounts')
+
+// requires the model with Passport-Local Mongoose plugged in
+const User = require('./models/user')
+
+// use static authenticate method of model in LocalStrategy
+passport.use(User.createStrategy())
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 const app = express()
 
-app.use(cors())
+app.use(
+  cors({
+    //origin: process.env.FRONTEND_URL,
+    origin: true,
+    credentials: true,
+  })
+)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+
+app.use(
+  session({
+    secret: 'mlkvd893hgkhg3820',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      httpOnly: false,
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+  })
+)
+
+app.use(passport.session())
 
 app.use(logger('dev'))
 app.use(express.json())
@@ -29,6 +68,7 @@ require('./database-connection')
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/movies', usersMovies)
+app.use('/accounts', accountsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

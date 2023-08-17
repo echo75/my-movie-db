@@ -3,6 +3,8 @@ const Movie = require('./movie.js')
 const putReview = require('./review.js')
 const autopopulate = require('mongoose-autopopulate')
 const chalk = require('chalk')
+const passport = require('passport')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema = new mongoose.Schema({
   firstName: String,
@@ -11,6 +13,8 @@ const userSchema = new mongoose.Schema({
   watched: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 })
+
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 
 class User {
   async putWatch(movie) {
