@@ -20,28 +20,45 @@ export default {
     }
   }
 }
+import '../assets/login.css' // Import login.css only for this component
 </script>
 
 <template lang="pug">
-h2 Sign up to MovieDB
-
-
-form(@submit.prevent="doSignUp")
-  div
-    label(for="firstName") First name
-    input#firstName(type="text" v-model="firstName" required )
-  div
-    label(for="surName") Surname
-    input#surName(type="text" v-model="surName" required )
-  div
-    label(for="email") Email
-    input#email(type="text" v-model="email" required )
-  div
-    label(for="password") Password
-    input#password(type="password" v-model="password" required)
-
-  button(type="submit") Sign up
-  p
-    | Do have an account?
-    router-link(to="/login") Login
+.logincontainer
+  .d-flex.justify-content-center.h-100
+    .card_signup
+      .card-header
+        h3 Sign In
+        p(v-if="user") You are logged in as {{ user?.firstName }} {{ user?.surName }}
+      .card-body
+        form(@submit.prevent="doSignUp")
+          .input-group.form-group
+            .input-group-prepend
+              span.input-group-text
+                i.fas.fa-user
+            input#firstName.form-control(type="text" v-model="firstName" placeholder='firstname' required autofocus)
+          .input-group.form-group
+            .input-group-prepend
+              span.input-group-text
+                i.fas.fa-user
+            input#surName.form-control(type="text" v-model="surName" placeholder='surname' required)
+          .input-group.form-group
+            .input-group-prepend
+              span.input-group-text
+                i.fas.fa-envelope
+            input#email.form-control(type="text" v-model="email" placeholder='email' required)
+          .input-group.form-group
+            .input-group-prepend
+              span.input-group-text
+                i.fas.fa-key
+            input#password.form-control(type="password" v-model="password" placeholder='password' required)
+          .form-group
+            input.btn.float-right.login_btn(type='submit' value='Sign up')
+            br
+      .card-footer
+        .d-flex.justify-content-center.links
+          | Do have an account?
+          a(href='/login') Login
+        .d-flex.justify-content-center
+          a(href='#') Forgot your password?
 </template>

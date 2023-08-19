@@ -19,28 +19,43 @@ export default {
     ...mapActions(useAccountStore, ['login']),
     async doLogin() {
       await this.login({ email: this.email, password: this.password })
-      this.$router.push('/')
+      this.$router.push('/login')
     }
   }
 }
+import '../assets/login.css' // Import login.css only for this component
 </script>
 
 <template lang="pug">
-h2 Log in to MovieDB
-
-p(v-if="user") You are logged in as {{ user?.firstName }}
-p(v-if="user") Logged in as: {{ user?.email }}
-
-form(@submit.prevent="doLogin" v-if="!user")
-  div
-    label(for="email") Email
-    input#email(type="text" v-model="email" required autofocus)
-  div
-    label(for="password") Password
-    input#password(type="password" v-model="password" required)
-
-  button(type="submit") Log in
-  p
-    | Don't have an account?
-    router-link(to="/signup") Sign up
+.logincontainer
+  .d-flex.justify-content-center.h-100
+    .card
+      .card-header
+        h3 Sign In
+        p(v-if="user") You are logged in as {{ user?.firstName }} {{ user?.surName }}
+      .card-body
+        form(@submit.prevent="doLogin" v-if="!user")
+          .input-group.form-group
+            .input-group-prepend
+              span.input-group-text
+                i.fas.fa-envelope
+            input#email.form-control(type="text" v-model="email" placeholder='email' required autofocus)
+          .input-group.form-group
+            .input-group-prepend
+              span.input-group-text
+                i.fas.fa-key
+            input#password.form-control(type="password" v-model="password" placeholder='password' required)
+          .form-group
+            input.btn.float-right.login_btn(type='submit' value='Login')
+      .card-footer
+        .d-flex.justify-content-center.links
+          | Don&apos;t have an account?
+          a(href='/signup') Sign Up
+        .d-flex.justify-content-center
+          a(href='#') Forgot your password?
 </template>
+<style>
+.card {
+  height: 370px !important;
+}
+</style>
