@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { useAccountStore } from './stores/account'
 import { mapActions, mapState } from 'pinia'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js' // Import Bootstrap JavaScript
 
 export default {
   name: 'App',
@@ -23,85 +24,42 @@ export default {
 }
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink v-if="!user" to="/login">Login</RouterLink>
-        <RouterLink v-if="!user" to="/signup">Signup</RouterLink>
-        <a v-if="user" @click="logout">Log out</a>
-      </nav>
-    </div>
-  </header>
-  <RouterView />
+<template lang="pug">
+header.p-3.text-bg-dark
+  .container
+    .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+      ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+        li
+          a.nav-link.px-2.text-white( :class="{ active: $route.path === '/' }", href='/') Home
+        li
+          a.nav-link.px-2.text-white(href='#') Search
+        li
+          a.nav-link.px-2.text-white(href='#') My Watchlist
+        li
+          a.nav-link.px-2.text-white(href='#') My Watched-List
+        li
+          a.nav-link.px-2.text-white(:class="{ active: $route.path === '/about' }", href='/about') About
+      .text-end
+        button.btn.btn-outline-light.me-2(type='button' v-if='!user' v-on:click="$router.push('/login')") Login
+        button.btn.btn-outline-light.me-2(type='button' v-if='user' @click='logout') Log out
+        button.btn.btn-outline-light(type='button' v-if='!user' v-on:click="$router.push('/signup')") Sign-up
+<RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+html {
+  height: 101% !important;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.nav-link.active {
+  font-weight: 700;
+  color: #ffca2b !important;
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.nav-link:hover {
+  color: #ffca2b !important;
 }
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.btn:hover {
+  color: #212529;
+  background-color: #ffca2b;
+  border-color: #ffca2b;
 }
 </style>
