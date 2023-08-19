@@ -1,7 +1,8 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import axios from 'axios'
+import { useAccountStore } from './stores/account'
+import { mapActions, mapState } from 'pinia'
 
 export default {
   name: 'App',
@@ -10,23 +11,14 @@ export default {
     RouterLink,
     RouterView
   },
-  data() {
-    user: null
-  },
-  mounted() {
-    this.fetchUser()
+  async mounted() {
+    await this.fetchUser()
   },
   methods: {
-    async fetchUser() {
-      try {
-        const response = await axios.get('http://localhost:3000/accounts/session', {
-          withCredentials: true
-        })
-        this.user = response.data
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    ...mapActions(useAccountStore, ['fetchUser', 'logout'])
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user'])
   }
 }
 </script>
@@ -41,12 +33,12 @@ export default {
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/signup">Sign up</RouterLink>
+        <RouterLink v-if="!user" to="/login">Login</RouterLink>
+        <RouterLink v-if="!user" to="/signup">Signup</RouterLink>
+        <a v-if="user" @click="logout">Log out</a>
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 

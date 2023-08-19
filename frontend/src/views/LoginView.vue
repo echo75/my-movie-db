@@ -1,23 +1,25 @@
 <script>
 import axios from 'axios'
+import { mapActions } from 'pinia'
+import { useAccountStore } from '../stores/account'
+import { mapState } from 'pinia'
 
 export default {
   name: 'LoginView',
   data() {
     return {
       email: '',
-      password: '',
-      user: null
+      password: ''
     }
   },
+  computed: {
+    ...mapState(useAccountStore, ['user'])
+  },
   methods: {
-    async login() {
-      this.user = await axios.post('http://localhost:3000/accounts/session', {
-        email: this.email,
-        password: this.password
-      })
-
-      console.log('->' + user)
+    ...mapActions(useAccountStore, ['login']),
+    async doLogin() {
+      await this.login({ email: this.email, password: this.password })
+      this.$router.push('/login')
     }
   }
 }
@@ -26,10 +28,10 @@ export default {
 <template lang="pug">
 h2 Log in to MovieDB
 
-p(v-if="user") You are logged in as {{ user?.data?.email }}
+p(v-if="user") You are logged in as {{ user?.firstName }}
+p(v-if="user") Logged in as: {{ user?.email }}
 
-
-form(@submit.prevent="login")
+form(@submit.prevent="doLogin" v-if="!user")
   div
     label(for="email") Email
     input#email(type="text" v-model="email" required autofocus)

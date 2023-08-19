@@ -25,22 +25,9 @@ router.post('/', async function (req, res, next) {
   }
 })
 
-// router.post('/', async function (req, res, next) {
-//   try {
-//     console.log(req.body)
-//     const user = await User.create({
-//       firstName: req.body.firstname,
-//       surName: req.body.surname,
-//     })
-//     res.send(user)
-//   } catch (error) {
-//     res.send(error.message)
-//   }
-// })
-
 router.post('/:id/reviews/', async function (req, res, next) {
   try {
-    console.log('-->', req.body)
+    //console.log('-->', req.body)
     // save review and rating for a single movie
     const user = await User.findById(req.params.id)
     const movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })

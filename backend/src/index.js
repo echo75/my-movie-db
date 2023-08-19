@@ -41,13 +41,13 @@ async function main() {
   //   rating: 5,
   // })
 
-  const Johan = await axios.post('/users', {
+  const johan = await axios.post('/users', {
     firstName: 'Johan',
     surName: 'Hedman',
     email: 'johan@hedman.de',
     password: '123456',
   })
-  console.log('Johan', Johan.data)
+  console.log('Johan', johan.data)
 
   const loggedin = await axios.post('/accounts/session', {
     email: 'johan@hedman.de',
