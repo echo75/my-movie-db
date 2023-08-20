@@ -62,3 +62,28 @@ import '../assets/login.css' // Import login.css only for this component
         .d-flex.justify-content-center
           a(href='#') Forgot your password?
 </template>
+<style>
+/* .card {
+  height: 370px !important;
+} */
+
+@media (min-width: 1400px) {
+  .container-xxl,
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 1320px !important;
+  }
+}
+.container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>
