@@ -3,7 +3,6 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { useAccountStore } from './stores/account'
 import { mapActions, mapState } from 'pinia'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js' // Import Bootstrap JavaScript
 
 export default {
   name: 'App',
