@@ -7,7 +7,7 @@
     .row
       .col-lg-12
         .page-header
-          h1 Movies have watched
+          h1 Movies I have watched
           br
     .row
       .col-lg-12
