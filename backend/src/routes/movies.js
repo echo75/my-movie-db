@@ -1,23 +1,11 @@
 var express = require('express')
-const User = require('../models/user')
+const omdb = require('../lib/omdb')
 var router = express.Router()
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send(User.list)
+router.get('/', async function (req, res, next) {
+  const query = { title: req.query.title }
+  const movieSearch = await omdb(query.title)
+  res.send(movieSearch.Search)
 })
 
-//create new user
-router.post('/', function (req, res, next) {
-  try {
-    console.log(req.body)
-    const user = User.create({
-      firstname: req.body.firstname,
-      surname: req.body.surname,
-    })
-    res.send(user)
-  } catch (error) {
-    res.send(error.message)
-  }
-})
 module.exports = router
