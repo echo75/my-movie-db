@@ -14,11 +14,11 @@ router.get('/session', async function (req, res, next) {
 // })
 
 // Login
-router.post('/session', passport.authenticate('local', { failWithError: true }), function (req, res, next) {
+router.post('/session', passport.authenticate('local', { failWithError: true }), async function (req, res, next) {
   res.send(req.user)
 })
 
-router.delete('/session', function (req, res, next) {
+router.delete('/session', async function (req, res, next) {
   req.logout(() => {
     res.sendStatus(200)
   })

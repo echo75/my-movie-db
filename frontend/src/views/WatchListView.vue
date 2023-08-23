@@ -82,7 +82,7 @@
 </template>
 <script>
 import axios from 'axios'
-import config from '@/config.js' // Adjust the path to the config.js file
+import config from '@/config.js'
 
 export default {
   data() {

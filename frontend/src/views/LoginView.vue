@@ -32,7 +32,7 @@ import '../assets/login.css' // Import login.css only for this component
     .card
       .card-header
         h3 Sign In
-        p(v-if="user") You are logged in as {{ user?.firstName }} {{ user?.surName }}
+        p(v-if="user") You are logged in as {{ user?.firstName }} {{ user?.surName }} {{ user?._id }}
       .card-body
         form(@submit.prevent="doLogin" v-if="!user")
           .input-group.form-group

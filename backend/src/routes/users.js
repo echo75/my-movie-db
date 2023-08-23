@@ -46,11 +46,15 @@ router.post('/:id/reviews/', async function (req, res, next) {
 
 // user/:id/watchlist
 router.post('/:id/watchlist', async function (req, res, next) {
-  let movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })
-
+  let movie = await Movie.findOne({ imdbID: req.body.imdbID })
   if (!movie) {
+    const { Title, Year, imdbID, Type, Poster } = req.body
     movie = await Movie.create({
-      ...req.body.movie,
+      Title,
+      Year,
+      imdbID,
+      Type,
+      Poster,
     })
   }
 

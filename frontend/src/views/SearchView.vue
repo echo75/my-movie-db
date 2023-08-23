@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import config from '@/config.js'
 
 export default {
   data() {
@@ -11,6 +12,14 @@ export default {
   },
   created() {
     this.fetchMovies()
+  },
+  mounted() {
+    // Use event delegation to handle click events on delete buttons
+    this.$el.addEventListener('click', this.handleSaveClick)
+  },
+  beforeDestroy() {
+    // Cleanup: Remove the event listener when the component is destroyed
+    this.$el.removeEventListener('click', this.handleSaveClick)
   },
   methods: {
     async fetchMovies() {
@@ -26,7 +35,7 @@ export default {
         return
       }
       try {
-        const response = await axios.get('http://127.0.0.1:3000/movies/', {
+        const response = await axios.get(`${config.apiUrl}/movies`, {
           params: {
             title: this.search_s
           }
@@ -37,6 +46,53 @@ export default {
       } catch (error) {
         console.error('Error fetching movies:', error)
       }
+    },
+    async saveMovie(id, title, year, type, poster) {
+      try {
+        const response = await axios.post(
+          `${config.apiUrl}/users/64df7e89ac6bb6f91e23a0fd/watchlist`,
+          {
+            imdbID: id,
+            Title: title,
+            Year: year,
+            Type: type,
+            Poster: poster
+          }
+        )
+        console.log(response)
+      } catch (error) {
+        console.error('Error saving movie:', error)
+      }
+    },
+    handleSaveClick(event) {
+      const target = event.target
+      if (target.classList.contains('save')) {
+        if (!confirm('Do you really want to save the movie from your Watched-List?')) return
+
+        const id = target.getAttribute('data-imdbid')
+        const title = target.getAttribute('data-title')
+        const year = target.getAttribute('data-year')
+        const type = target.getAttribute('data-type')
+        const poster = target.getAttribute('data-poster')
+        // Call the saveMovie method with the retrieved id
+        this.saveMovie(id, title, year, type, poster)
+
+        target.closest('.save').style.backgroundColor = '#ff2222'
+        const tr = target.closest('tr')
+        this.fadeOutAndRemove(tr)
+      }
+    },
+    fadeOutAndRemove(element) {
+      var opacity = 1
+      var interval = setInterval(() => {
+        if (opacity > 0) {
+          opacity -= 0.1
+          element.style.opacity = opacity
+        } else {
+          clearInterval(interval)
+          element.parentNode.removeChild(element)
+        }
+      }, 40) // Adjust the fading speed as needed
     },
     resetSearch() {
       this.search_s = '' // Reset the search query
@@ -118,12 +174,15 @@ export default {
                   </td>
                   <td>{{ movie.Title }}</td>
                   <td>{{ movie.Year }}</td>
-                  <td class="td_delete">
+                  <td class="td_save">
                     <button
-                      class="btn-sm delete"
-                      id="delete_button_1"
+                      class="btn-sm save"
                       type="button"
-                      data-imdbid="{{ movie.imdbID }}"
+                      :data-imdbid="movie.imdbID"
+                      :data-title="movie.Title"
+                      :data-year="movie.Year"
+                      :data-type="movie.Type"
+                      :data-poster="movie.Poster"
                     >
                       Save
                     </button>
@@ -166,7 +225,7 @@ export default {
   height: 42px;
 }
 
-td.td_delete {
+td.td_save {
   text-align: right !important;
 }
 
@@ -183,11 +242,11 @@ td.td_delete {
 }
 
 /* Buttons */
-.delete {
+.save {
   background-color: #7fc0e0;
 }
 
-.delete:hover {
+.save:hover {
   background-color: #0079a1;
 }
 

@@ -56,7 +56,7 @@ async function main() {
   console.log('loggedin', loggedin.data)
 
   movieToWatchList = await axios.post(`/users/${loggedin.data._id}/watchlist`, {
-    movie: movieSource.Search[5],
+    movie: movieSource.Search[6],
   })
 
   // const deleteMovieFromWatchList = await axios.delete(
