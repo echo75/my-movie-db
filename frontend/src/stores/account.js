@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-//axios.defaults.withCredentials = true
-//axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
 export const useAccountStore = defineStore('Account', {
   state: () => ({
@@ -10,21 +10,13 @@ export const useAccountStore = defineStore('Account', {
   }),
   actions: {
     async fetchUser() {
-      this.user = (
-        await axios.get('http://localhost:3000/accounts/session', {
-          withCredentials: true
-        })
-      ).data
+      this.user = (await axios.get('/accounts/session', {})).data
     },
     async login({ email, password }) {
-      this.user = (
-        await axios.post('http://localhost:3000/accounts/session', { email, password })
-      ).data
+      this.user = (await axios.post('/accounts/session', { email, password })).data
     },
     async logout() {
-      await axios.delete('http://localhost:3000/accounts/session', {
-        withCredentials: true
-      })
+      await axios.delete('/accounts/session', {})
       this.user = null
     }
   }

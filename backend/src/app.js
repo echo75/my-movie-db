@@ -25,6 +25,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 const app = express()
+app.set('trust proxy', 1)
 
 app.use(
   cors({
@@ -37,6 +38,7 @@ app.use(
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+const clientPromise = mongoose.connection.asPromise().then(connection => (connection = connection.getClient()))
 
 app.use(
   session({
@@ -44,16 +46,17 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false,
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-      httpOnly: false,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     },
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI,
+      clientPromise,
+      stringify: false,
     }),
   })
 )
-
+app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(logger('dev'))

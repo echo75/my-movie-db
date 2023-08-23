@@ -6,9 +6,9 @@ const router = express.Router()
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-  const numberOfCalls = req.session.numberOfCalls || 0
-  console.log('Number of calls: ', numberOfCalls)
-  req.session.numberOfCalls = numberOfCalls + 1
+  // const numberOfCalls = req.session.numberOfCalls || 0
+  // console.log('Number of calls: ', numberOfCalls)
+  // req.session.numberOfCalls = numberOfCalls + 1
   const users = await User.find()
   res.send(users)
 })
