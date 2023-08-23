@@ -1,0 +1,44 @@
+/***Style the unordered list with the class 'enlarge'***/
+ul.enlarge,
+ul.enlarge li,
+ul.enlarge ul li {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: 0;
+}
+ul.enlarge li {
+  display: inline-block; /*places the images in a line*/
+  position: relative; /*allows precise positioning of the popup image when used with position:absolute - see support section */
+  z-index: 0; /*resets the stack order of the list items - we'll increase in step 4. See support section for more info*/
+  margin: 0; /*space between the images*/
+  padding: 0; /*removes the padding*/
+}
+/***In the HTML in step one we placed the large image inside a <span>, now we move it off the page until it's required***/
+ul.enlarge span {
+  position: absolute; /*see support section for more info on positioning*/
+  left: -9999px; /*moves the span off the page, effectively hidding it from view*/
+}
+/***Note: This styling will apply to both the thumbnail and popup image, unless you override these styles in step five***/
+ul.enlarge img {
+  /*give the thumbnails a frame*/
+  /*add a drop shadow to the frame*/
+  -webkit-box-shadow: 0 0 6px rgba(132, 132, 132, 0.75);
+  -moz-box-shadow: 0 0 6px rgba(132, 132, 132, 0.75);
+  box-shadow: 0 0 6px rgba(132, 132, 132, 0.75);
+  /*and give the corners a small curve*/
+}
+ul.enlarge li:hover {
+  z-index: 50; /*places the popups infront of the thumbnails, which we gave a z-index of 0 in step 1*/
+  cursor: pointer; /*changes the cursor to a hand*/
+}
+/***We bring the large image back onto the page by reducing left from -9999px (set in step 2) to figures below***/
+ul.enlarge li:hover span {
+  /*positions the <span> when the <li> (which contains the thumbnail) is hovered*/
+  top: 30px; /*the distance from the bottom of the thumbnail to the top of the popup image*/
+  left: 0px; /*distance from the left of the thumbnail to the left of the popup image*/
+}
+/***To make it look neater we used :nth-child to set a different left distance for each image***/
+ul.enlarge li:hover:nth-child(2) span {
+  left: 1px;
+}
