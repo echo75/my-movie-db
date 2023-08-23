@@ -41,13 +41,13 @@ async function main() {
   //   rating: 5,
   // })
 
-  const johan = await axios.post('/users', {
-    firstName: 'Johan',
-    surName: 'Hedman',
-    email: 'johan@hedman.de',
-    password: '123456',
-  })
-  console.log('Johan', johan.data)
+  // const johan = await axios.post('/users', {
+  //   firstName: 'Johan',
+  //   surName: 'Hedman',
+  //   email: 'johan@hedman.de',
+  //   password: '123456',
+  // })
+  // console.log('Johan', johan.data)
 
   const loggedin = await axios.post('/accounts/session', {
     email: 'johan@hedman.de',
@@ -55,9 +55,9 @@ async function main() {
   })
   console.log('loggedin', loggedin.data)
 
-  // movieToWatchList = await axios.post(`/users/${morgan_.data._id}/watchlist`, {
-  //   movie: movieSource.Search[1],
-  // })
+  movieToWatchList = await axios.post(`/users/${loggedin.data._id}/watchlist`, {
+    movie: movieSource.Search[5],
+  })
 
   // const deleteMovieFromWatchList = await axios.delete(
   //   `/users/${jenny.data._id}/watchlist/${movieSource.Search[0].imdbID}`

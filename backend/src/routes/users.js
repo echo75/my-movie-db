@@ -64,6 +64,16 @@ router.post('/:id/watchlist', async function (req, res, next) {
   }
 })
 
+// get all movies from watchlist of a user
+router.get('/:id/watchlist', async function (req, res, next) {
+  try {
+    const user = await User.findById(req.params.id).populate('watch')
+    res.send(user.watch)
+  } catch (error) {
+    res.send(error.message)
+  }
+})
+
 // user/:id/watchedlist
 router.post('/:id/watchedlist', async function (req, res, next) {
   try {

@@ -5,7 +5,8 @@ export default {
   data() {
     return {
       search_s: '',
-      movies: [] // To hold the fetched movies
+      movies: [], // To hold the fetched movies
+      hasFetchedOnce: false // Flag to track if fetchMovies has been called at least once
     }
   },
   created() {
@@ -14,7 +15,9 @@ export default {
   methods: {
     async fetchMovies() {
       if (this.search_s.length < 3) {
-        alert('Please input more then 3 characters')
+        if (this.hasFetchedOnce) {
+          alert('Please input more then 3 characters')
+        }
         return false
       }
       if (!this.search_s) {
@@ -29,6 +32,7 @@ export default {
           }
         })
         this.movies = response.data // Assuming the API response contains an array of movies
+        this.hasFetchedOnce = true // Set the flag to true after the first fetch
         console.log(this.movies)
       } catch (error) {
         console.error('Error fetching movies:', error)
@@ -40,35 +44,6 @@ export default {
     }
   }
 }
-
-// export default {
-//   data() {
-//     return {
-//       search_s: ''
-//     }
-//   },
-//   methods: {
-//     async searchMovie() {
-//       if (this.search_s.length < 3) {
-//         alert('Please input more then 3 characters')
-//         return false
-//       }
-
-//       const movies = await axios.get('http://127.0.0.1:3000/movies/', {
-//         params: {
-//           title: this.search_s
-//         }
-//       })
-
-//       console.log(movies)
-
-//       //localhost:3000/movies/
-//       // Perform search action using this.searchQuery
-//       http: console.log('Searching for:', this.search_s)
-//       // You can call an API, filter data, or implement your search logic here
-//     }
-//   }
-// }
 </script>
 <template>
   <div class="container">
