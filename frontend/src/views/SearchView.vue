@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios'
-import config from '@/config.js'
+//import config from '@/config.js'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
 export default {
   data() {
@@ -35,7 +37,7 @@ export default {
         return
       }
       try {
-        const response = await axios.get(`${config.apiUrl}/movies`, {
+        const response = await axios.get('/movies', {
           params: {
             title: this.search_s
           }
@@ -49,16 +51,13 @@ export default {
     },
     async saveMovie(id, title, year, type, poster) {
       try {
-        const response = await axios.post(
-          `${config.apiUrl}/users/64df7e89ac6bb6f91e23a0fd/watchlist`,
-          {
-            imdbID: id,
-            Title: title,
-            Year: year,
-            Type: type,
-            Poster: poster
-          }
-        )
+        const response = await axios.post(`/users/64df7e89ac6bb6f91e23a0fd/watchlist`, {
+          imdbID: id,
+          Title: title,
+          Year: year,
+          Type: type,
+          Poster: poster
+        })
         console.log(response)
       } catch (error) {
         console.error('Error saving movie:', error)

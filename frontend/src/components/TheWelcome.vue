@@ -8,7 +8,10 @@ import SupportIcon from './icons/IconSupport.vue'
 
 import axios from 'axios'
 
-const { data } = await axios.get('http://localhost:3000/users')
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
+
+const { data } = await axios.get('/users')
 </script>
 
 <template>

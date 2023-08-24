@@ -82,7 +82,9 @@
 </template>
 <script>
 import axios from 'axios'
-import config from '@/config.js'
+//import config from '@/config.js'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
 export default {
   data() {
@@ -103,9 +105,7 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        const response = await axios.get(
-          `${config.apiUrl}/users/64df7e89ac6bb6f91e23a0fd/watchlist`
-        )
+        const response = await axios.get(`/users/64df7e89ac6bb6f91e23a0fd/watchlist`)
         this.movies = response.data // Assuming the API response contains an array of movies
       } catch (error) {
         console.error('Error fetching movies:', error)
@@ -113,9 +113,7 @@ export default {
     },
     async deleteMovie(id) {
       try {
-        const response = await axios.delete(
-          `${config.apiUrl}/users/64df7e89ac6bb6f91e23a0fd/watchlist/${id}`
-        )
+        const response = await axios.delete(`/users/64df7e89ac6bb6f91e23a0fd/watchlist/${id}`)
         console.log(response)
       } catch (error) {
         console.error('Error deleting movie:', error)
