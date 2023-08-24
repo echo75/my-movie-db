@@ -4,6 +4,9 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
+import { useAccountStore } from '@/stores/account' // Import the account store
+import { mapState } from 'pinia'
+
 export default {
   data() {
     return {
@@ -11,6 +14,9 @@ export default {
       movies: [], // To hold the fetched movies
       hasFetchedOnce: false // Flag to track if fetchMovies has been called at least once
     }
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user']) // Map the user state to a local computed property
   },
   created() {
     this.fetchMovies()
@@ -51,7 +57,7 @@ export default {
     },
     async saveMovie(id, title, year, type, poster) {
       try {
-        const response = await axios.post(`/users/64df7e89ac6bb6f91e23a0fd/watchlist`, {
+        const response = await axios.post(`/users/${this.user._id}/watchlist`, {
           imdbID: id,
           Title: title,
           Year: year,

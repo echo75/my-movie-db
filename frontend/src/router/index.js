@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+// import store from '../stores'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,10 @@ const router = createRouter({
       path: '/watchlist',
       name: 'watchlist',
       component: () => import('../views/WatchListView.vue')
+      // beforeEnter: (to, from, next) => {
+      //   if (store.state.user) next('/')
+      //   else next()
+      // }
     },
     {
       path: '/watchedlist',

@@ -85,12 +85,17 @@ import axios from 'axios'
 //import config from '@/config.js'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
+import { useAccountStore } from '@/stores/account' // Import the account store
+import { mapState } from 'pinia'
 
 export default {
   data() {
     return {
       movies: [] // To hold the fetched movies
     }
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user']) // Map the user state to a local computed property
   },
   mounted() {
     this.fetchMovies() // Moved fetchMovies to mounted hook to ensure data is loaded before attaching event listeners
@@ -105,7 +110,7 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        const response = await axios.get(`/users/64df7e89ac6bb6f91e23a0fd/watchlist`)
+        const response = await axios.get(`/users/${this.user._id}/watchlist`)
         this.movies = response.data // Assuming the API response contains an array of movies
       } catch (error) {
         console.error('Error fetching movies:', error)
@@ -113,7 +118,7 @@ export default {
     },
     async deleteMovie(id) {
       try {
-        const response = await axios.delete(`/users/64df7e89ac6bb6f91e23a0fd/watchlist/${id}`)
+        const response = await axios.delete(`/users/${this.user._id}/watchlist/${id}`)
         console.log(response)
       } catch (error) {
         console.error('Error deleting movie:', error)
