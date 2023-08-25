@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Movie = require('./movie.js')
 const putReview = require('./review.js')
 const autopopulate = require('mongoose-autopopulate')
-const chalk = require('chalk')
 
 const userSchema = new mongoose.Schema({
   firstName: String,
