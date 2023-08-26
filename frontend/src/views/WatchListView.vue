@@ -60,7 +60,7 @@
                   <td class="td_delete" @click="handleButtonClick">
                     <button
                       type="button"
-                      class="btn btn-warning btn-sm about"
+                      class="btn btn-secondary btn-sm about"
                       style="margin: 1px 2px"
                       :data-imdbid="movie.imdbID"
                       data-bs-toggle="modal"
@@ -70,7 +70,7 @@
                     </button>
                     <button
                       type="button"
-                      class="btn btn-primary btn-sm watched"
+                      class="btn btn-secondary btn-sm watched"
                       style="margin: 1 2px"
                       :data-imdbid="movie.imdbID"
                     >
@@ -78,7 +78,7 @@
                     </button>
                     <button
                       type="button"
-                      class="btn btn-danger btn-sm delete"
+                      class="btn btn-secondary btn-sm delete"
                       style="margin: 1px 2px"
                       :data-imdbid="movie.imdbID"
                     >
@@ -238,25 +238,40 @@ td.td_delete {
 /* Buttons */
 
 .watched {
-  border: rgb(1, 68, 90) solid 1px;
+  border: rgb(3, 24, 93) solid 1px;
+  color: #ffca2c;
+  background-color: #2c3035;
 }
 .watched:hover {
   color: #ffffff;
+  background-color: #727d87;
 }
 .about {
-  background-color: #ffca2c;
-  border: rgb(203, 182, 28) solid 1px;
+  border: rgb(3, 24, 93) solid 1px;
+  color: #ffca2c;
+  background-color: #2c3035;
 }
 .about:hover {
-  background-color: #cf911d;
+  color: #ffffff;
+  background-color: #727d87;
 }
 .delete {
-  background-color: #d73321;
-  border: rgb(148, 12, 12) solid 1px;
+  border: rgb(3, 24, 93) solid 1px;
+  color: #ffca2c;
+  background-color: #2c3035;
 }
 .delete:hover {
-  background-color: #a12317;
+  color: #ffffff;
+  background-color: #727d87;
 }
+
+/* Stars */
+.fa,
+.fas {
+  font-weight: 900;
+  color: gold;
+}
+
 #movie_table td {
   min-width: 40px;
   text-align: left;
