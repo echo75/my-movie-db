@@ -16,7 +16,7 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">Movie {{ movie.Title }} <br /></div>
+        <div class="modal-body">Movie <br /></div>
         <div class="modal-footer p-3 text-bg-dark">
           <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
         </div>
