@@ -57,13 +57,14 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                   </td>
-                  <td class="td_delete">
+                  <td class="td_delete" @click="handleButtonClick">
                     <button
                       type="button"
                       class="btn btn-warning btn-sm about"
                       style="margin: 1px 2px"
+                      :data-imdbid="movie.imdbID"
                       data-bs-toggle="modal"
-                      data-bs-target="#exampleModalFullscreen"
+                      data-bs-target=".movie-modal"
                     >
                       About this movie
                     </button>
@@ -71,6 +72,7 @@
                       type="button"
                       class="btn btn-primary btn-sm watched"
                       style="margin: 1 2px"
+                      :data-imdbid="movie.imdbID"
                     >
                       Mark as watched
                     </button>
@@ -107,7 +109,9 @@
       </div>
     </footer>
   </div>
+  <movie-modal></movie-modal>
 </template>
+
 <script>
 import axios from 'axios'
 //import config from '@/config.js'
@@ -115,27 +119,37 @@ axios.defaults.withCredentials = true
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 import { useAccountStore } from '@/stores/account' // Import the account store
 import { mapState } from 'pinia'
+import MovieModal from '../components/MovieModal.vue' // Import the component
 
 export default {
   data() {
     return {
-      movies: [] // To hold the fetched movies
+      movies: [], // To hold the fetched movies
+      clickedImdbId: '' // Store clicked imdbId
     }
+  },
+  components: {
+    MovieModal // Register the component
   },
   computed: {
     ...mapState(useAccountStore, ['user']) // Map the user state to a local computed property
   },
   mounted() {
     this.fetchMovies() // Moved fetchMovies to mounted hook to ensure data is loaded before attaching event listeners
+  },
 
-    // Use event delegation to handle click events on delete buttons
-    this.$el.addEventListener('click', this.handleDeleteClick)
-  },
-  beforeDestroy() {
-    // Cleanup: Remove the event listener when the component is destroyed
-    this.$el.removeEventListener('click', this.handleDeleteClick)
-  },
   methods: {
+    handleButtonClick(event) {
+      const target = event.target
+
+      if (target.classList.contains('delete')) {
+        this.handleDeleteClick(event)
+      } else if (target.classList.contains('about')) {
+        this.handleAboutClick(event)
+      } else if (target.classList.contains('watched')) {
+        //this.handleWatchedClick(event)
+      }
+    },
     async fetchMovies() {
       try {
         const response = await axios.get(`/users/${this.user._id}/watchlist`)
@@ -178,6 +192,14 @@ export default {
           element.parentNode.removeChild(element)
         }
       }, 40) // Adjust the fading speed as needed
+    },
+    handleAboutClick(event) {
+      const target = event.target
+      if (target.classList.contains('about')) {
+        var id = target.getAttribute('data-imdbID')
+        console.log(id)
+        this.clickedImdbId = id
+      }
     }
   }
 }
