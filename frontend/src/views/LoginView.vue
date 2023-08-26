@@ -31,7 +31,7 @@ import '../assets/login.css' // Import login.css only for this component
   .d-flex.justify-content-center.h-100
     .card
       .card-header
-        h3 Sign In
+        h3 Log in
         p(v-if="user") You are logged in as {{ user?.firstName }} {{ user?.surName }}
       .card-body
         form(@submit.prevent="doLogin" v-if="!user")

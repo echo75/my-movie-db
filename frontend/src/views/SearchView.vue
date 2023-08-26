@@ -82,23 +82,27 @@ export default {
         // Call the saveMovie method with the retrieved id
         this.saveMovie(id, title, year, type, poster)
 
-        target.closest('.save').style.backgroundColor = '#ff2222'
-        const tr = target.closest('tr')
-        this.fadeOutAndRemove(tr)
+        target.closest('.save').style.backgroundColor = '#129b29'
+        target.closest('.save').style.color = '#ffffff'
+        target.closest('.save').innerHTML = 'Saved'
+        target.closest('.save').disabled = true
+
+        //const tr = target.closest('tr')
+        //this.fadeOutAndRemove(tr)
       }
     },
-    fadeOutAndRemove(element) {
-      var opacity = 1
-      var interval = setInterval(() => {
-        if (opacity > 0) {
-          opacity -= 0.1
-          element.style.opacity = opacity
-        } else {
-          clearInterval(interval)
-          element.parentNode.removeChild(element)
-        }
-      }, 40) // Adjust the fading speed as needed
-    },
+    // fadeOutAndRemove(element) {
+    //   var opacity = 1
+    //   var interval = setInterval(() => {
+    //     if (opacity > 0) {
+    //       opacity -= 0.1
+    //       element.style.opacity = opacity
+    //     } else {
+    //       clearInterval(interval)
+    //       element.parentNode.removeChild(element)
+    //     }
+    //   }, 40) // Adjust the fading speed as needed
+    // },
     resetSearch() {
       this.search_s = '' // Reset the search query
       this.movies = [] // Clear the movies array
@@ -188,8 +192,10 @@ export default {
                       :data-year="movie.Year"
                       :data-type="movie.Type"
                       :data-poster="movie.Poster"
+                      :style="{ width: !user ? '128px' : '80px' }"
+                      :disabled="!user"
                     >
-                      Save
+                      {{ user ? 'Save' : 'Login to Save' }}
                     </button>
                   </td>
                 </tr>
@@ -249,10 +255,12 @@ td.td_save {
 /* Buttons */
 .save {
   background-color: #7fc0e0;
+  width: 80px;
 }
 
 .save:hover {
   background-color: #0079a1;
+  color: #ffffff;
 }
 
 .btn-sm {
