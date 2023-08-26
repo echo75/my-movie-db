@@ -3,6 +3,7 @@ import axios from 'axios'
 import { mapActions } from 'pinia'
 import { useAccountStore } from '../stores/account'
 import { mapState } from 'pinia'
+import '@/assets/fontawesome.min.js'
 
 export default {
   name: 'LoginView',

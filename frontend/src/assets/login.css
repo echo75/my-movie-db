@@ -1,6 +1,6 @@
-@import 'https://use.fontawesome.com/releases/v5.3.1/css/all.css';
+@import '@/assets/font-awesome.min.css';
 
-@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css';
+@import '@/assets/bootstrap411.css';
 body {
   background-image: url('../assets/matterhorn.jpg');
   background-size: cover;
