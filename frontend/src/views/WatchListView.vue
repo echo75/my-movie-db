@@ -50,8 +50,36 @@
                   </td>
                   <td>{{ movie.Title }}</td>
                   <td>{{ movie.Year }}</td>
+                  <td>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </td>
                   <td class="td_delete">
-                    <button class="btn-sm delete" type="button" :data-imdbid="movie.imdbID">
+                    <button
+                      type="button"
+                      class="btn btn-warning btn-sm about"
+                      style="margin: 1px 2px"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalFullscreen"
+                    >
+                      About this movie
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm watched"
+                      style="margin: 1 2px"
+                    >
+                      Mark as watched
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm delete"
+                      style="margin: 1px 2px"
+                      :data-imdbid="movie.imdbID"
+                    >
                       Delete
                     </button>
                   </td>
@@ -156,6 +184,7 @@ export default {
 </script>
 
 <style scoped>
+@import 'https://use.fontawesome.com/releases/v5.3.1/css/all.css';
 @import '@/assets/hovermoviepic.css';
 #movie_table {
   width: 100%;
@@ -185,25 +214,27 @@ td.td_delete {
 }
 
 /* Buttons */
+
+.watched {
+  border: rgb(1, 68, 90) solid 1px;
+}
+.watched:hover {
+  color: #ffffff;
+}
+.about {
+  background-color: #ffca2c;
+  border: rgb(203, 182, 28) solid 1px;
+}
+.about:hover {
+  background-color: #cf911d;
+}
 .delete {
-  background-color: #7fc0e0;
+  background-color: #d73321;
+  border: rgb(148, 12, 12) solid 1px;
 }
-
 .delete:hover {
-  background-color: #0079a1;
+  background-color: #a12317;
 }
-
-.btn-sm {
-  padding: 8px 16px;
-}
-
-.btn-sm,
-.btn-group-sm > .btn {
-  font-size: 15px;
-  border: 1px solid transparent;
-  border-radius: 0px;
-}
-
 #movie_table td {
   min-width: 40px;
   text-align: left;
