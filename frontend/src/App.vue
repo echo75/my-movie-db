@@ -22,7 +22,11 @@ export default {
     this.isLoading = false
   },
   methods: {
-    ...mapActions(useAccountStore, ['fetchUser', 'logout'])
+    ...mapActions(useAccountStore, ['fetchUser', 'logout']),
+    async doLogout() {
+      await this.logout()
+      this.$router.push('/login')
+    }
   },
   computed: {
     ...mapState(useAccountStore, ['user'])
@@ -49,7 +53,7 @@ div(v-else)
             a.nav-link.px-2.text-white(:class="{ active: $route.path === '/about' }", href='/about') About
         .text-end
           button.btn.btn-outline-light.me-2(type='button' v-show='!user' v-on:click="$router.push('/login')") Login
-          button.btn.btn-outline-light.me-2(type='button' v-show='user' @click='logout') Log out
+          button.btn.btn-outline-light.me-2(type='button' v-show='user' @click='doLogout') Log out
           button.btn.btn-outline-light(type='button' v-show='!user' v-on:click="$router.push('/signup')") Sign up
   <RouterView />
 </template>

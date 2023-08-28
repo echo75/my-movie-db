@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import store from '../stores'
+import { useAccountStore } from '../stores/account'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,8 +20,12 @@ const router = createRouter({
       name: 'watchlist',
       component: () => import('../views/WatchListView.vue')
       // beforeEnter: (to, from, next) => {
-      //   if (store.state.user) next('/')
-      //   else next()
+      //   const accountStore = useAccountStore()
+
+      //   if (!accountStore.user) {
+      //     return next({ name: 'home' })
+      //   }
+      //   // return next()
       // }
     },
     {

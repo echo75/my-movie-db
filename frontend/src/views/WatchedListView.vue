@@ -109,7 +109,7 @@
       </div>
     </footer>
   </div>
-  <movie-modal></movie-modal>
+  <movie-modal :movie-info="movieInfo"></movie-modal>
 </template>
 
 <script>
@@ -125,7 +125,8 @@ export default {
   data() {
     return {
       movies: [], // To hold the fetched movies
-      clickedImdbId: '' // Store clicked imdbId
+      clickedImdbId: '', // Store clicked imdbId
+      movieInfo: {} // To hold the movie info
     }
   },
   components: {
@@ -146,6 +147,7 @@ export default {
         this.handleDeleteClick(event)
       } else if (target.classList.contains('about')) {
         this.handleAboutClick(event)
+        this.fetchDetailedInfo(event)
       } else if (target.classList.contains('watched')) {
         //this.handleWatchedClick(event)
       }
@@ -199,6 +201,21 @@ export default {
         var id = target.getAttribute('data-imdbID')
         console.log(id)
         this.clickedImdbId = id
+      }
+    },
+    async fetchDetailedInfo(event) {
+      const target = event.target
+      const imdbID = target.getAttribute('data-imdbID')
+      try {
+        const response = await axios.get('/movies/details', {
+          params: {
+            imdbID: imdbID
+          }
+        })
+        console.log(response.data)
+        this.movieInfo = response.data
+      } catch (error) {
+        console.error('Error fetching detailed info:', error)
       }
     }
   }

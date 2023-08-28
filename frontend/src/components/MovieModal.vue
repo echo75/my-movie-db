@@ -21,28 +21,21 @@
           <div class="container text-center">
             <div class="row">
               <div class="col-md-auto poster">
-                <img
-                  src="https://m.media-amazon.com/images/M/MV5BMTM2NDkxMjQxMV5BMl5BanBnXkFtZTYwNTMxMDM4._V1_SX300.jpg"
-                  alt="poster"
-                  class="img-fluid responsive"
-                />
+                <div v-if="movieInfo?.Poster && movieInfo?.Poster != 'N/A'">
+                  <img v-bind:src="movieInfo?.Poster" alt="poster" class="img-fluid responsive" />
+                </div>
+                <div v-else>
+                  <img
+                    src="https://via.placeholder.com/300x450"
+                    alt="poster"
+                    class="img-fluid responsive"
+                  />
+                </div>
               </div>
               <div class="col content">
                 <div class="plott">
-                  <h2>The Golden Compass</h2>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic nihil illum!
-                  Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut laudantium autem
-                  odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit amet consectetur
-                  adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus, id iusto sunt
-                  minima ut rerum quis omnis aut laudantium autem odit possimus quaerat animi
-                  molestiae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic
-                  nihil illum! Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut
-                  laudantium autem odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit
-                  amet consectetur adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus,
-                  id iusto sunt minima ut rerum quis omnis aut laudantium autem odit possimus
-                  quaerat animi molestiae. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Dolorum hic nihil illum! Dolorum repellendus, id iusto sunt minima ut rerum quis
-                  omnis aut laudantium autem odit possimus quaerat animi molestiae.
+                  <h2>{{ movieInfo?.Title }}</h2>
+                  <p>{{ movieInfo?.Plot }}</p>
                 </div>
                 <div class="ratingbox">
                   <h4>
@@ -54,21 +47,46 @@
                     <i class="fa fa-star-o"></i>
                   </h4>
                 </div>
+
+                <div>
+                  <h4>Actors:</h4>
+                  <p>{{ movieInfo?.Actors }}</p>
+                </div>
+                <div>
+                  <h4>Director:</h4>
+                  <p>{{ movieInfo?.Director }}</p>
+                </div>
+                <div>
+                  <h4>Genre:</h4>
+                  <p>{{ movieInfo?.Genre }}</p>
+                </div>
+                <div>
+                  <h4>Released:</h4>
+                  <p>{{ movieInfo?.Released }}</p>
+                </div>
+                <div>
+                  <h4>Runtime:</h4>
+                  <p>{{ movieInfo?.Runtime }}</p>
+                </div>
                 <div class="reviews">
                   <h4>Reviews:</h4>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic nihil illum!
-                  Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut laudantium autem
-                  odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit amet consectetur
-                  adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus, id iusto sunt
-                  minima ut rerum quis omnis aut laudantium autem odit possimus quaerat animi
-                  molestiae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic
-                  nihil illum! Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut
-                  laudantium autem odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit
-                  amet consectetur adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus,
-                  id iusto sunt minima ut rerum quis omnis aut laudantium autem odit possimus
-                  quaerat animi molestiae. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Dolorum hic nihil illum! Dolorum repellendus, id iusto sunt minima ut rerum quis
-                  omnis aut laudantium autem odit possimus quaerat animi molestiae.
+
+                  <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic nihil
+                    illum! Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut
+                    laudantium autem odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit
+                    amet consectetur adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus,
+                    id iusto sunt minima ut rerum quis omnis aut laudantium autem odit possimus
+                    quaerat animi molestiae. Lorem ipsum, dolor sit amet consectetur adipisicing
+                    elit. Dolorum hic nihil illum! Dolorum repellendus, id iusto sunt minima ut
+                    rerum quis omnis aut laudantium autem odit possimus quaerat animi molestiae.
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic nihil
+                    illum! Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut
+                    laudantium autem odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit
+                    amet consectetur adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus,
+                    id iusto sunt minima ut rerum quis omnis aut laudantium autem odit possimus
+                    quaerat animi molestiae.
+                  </p>
                 </div>
               </div>
             </div>
@@ -85,9 +103,14 @@
 import '@/assets/fontawesome.min.js'
 export default {
   name: 'MovieModal',
-  data() {},
+  data() {
+    return {}
+  },
   props: {
-    //imdbId: String // Define a prop to receive the data-imdbID value
+    movieInfo: {
+      type: Object,
+      required: false
+    }
   },
   methods: {}
 }

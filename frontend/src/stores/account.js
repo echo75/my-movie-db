@@ -19,8 +19,6 @@ export const useAccountStore = defineStore('Account', {
     async logout() {
       await axios.delete('/accounts/session', {})
       this.user = null
-      const router = useRouter()
-      await router.push('/login')
     }
   }
 }) // end of store
