@@ -1,6 +1,7 @@
 <script>
 import { mapActions } from 'pinia'
 import { useUserStore } from '../stores/user'
+import '@/assets/fontawesome.min.js'
 
 export default {
   name: 'SignUpView',

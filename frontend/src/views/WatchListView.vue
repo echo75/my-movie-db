@@ -128,6 +128,9 @@ export default {
       clickedImdbId: '' // Store clicked imdbId
     }
   },
+  props: {
+    imdbId: String // Define the prop to receive the IMDb ID
+  },
   components: {
     MovieModal // Register the component
   },
@@ -146,8 +149,9 @@ export default {
         this.handleDeleteClick(event)
       } else if (target.classList.contains('about')) {
         this.handleAboutClick(event)
+        this.fetchDetailedInfo(event)
       } else if (target.classList.contains('watched')) {
-        //this.handleWatchedClick(event)
+        this.handleWatchedClick(event)
       }
     },
     async fetchMovies() {
@@ -166,10 +170,33 @@ export default {
         console.error('Error deleting movie:', error)
       }
     },
+    async moveMovie(id) {
+      try {
+        const response = await axios.post(`/users/${this.user._id}/watchedlist/${id}`)
+        console.log(response)
+      } catch (error) {
+        console.error('Error marking movie as watched:', error)
+      }
+    },
+    handleWatchedClick(event) {
+      const target = event.target
+      if (target.classList.contains('watched')) {
+        if (!confirm('Do you really want to move this movie to your Watched-List?')) return
+
+        var id = target.getAttribute('data-imdbID')
+
+        // Call the deleteMovie method with the retrieved id
+        this.moveMovie(id)
+
+        target.closest('.watched').style.backgroundColor = '#35ad14'
+        const tr = target.closest('tr')
+        this.fadeOutAndRemove(tr)
+      }
+    },
     handleDeleteClick(event) {
       const target = event.target
       if (target.classList.contains('delete')) {
-        if (!confirm('Do you really want to delete the movie from your Watched-List?')) return
+        if (!confirm('Do you really want to delete the movie from your Watch-List?')) return
 
         var id = target.getAttribute('data-imdbID')
 
@@ -200,13 +227,23 @@ export default {
         console.log(id)
         this.clickedImdbId = id
       }
+    },
+    async fetchDetailedInfo(event) {
+      const target = event.target
+      const imdbID = target.getAttribute('data-imdbID')
+      const response = await axios.get('/movies/details', {
+        params: {
+          imdbID: imdbID
+        }
+      })
+      console.log(response.data)
     }
   }
 }
 </script>
 
 <style scoped>
-@import 'https://use.fontawesome.com/releases/v5.3.1/css/all.css';
+@import '@/assets/font-awesome.min.css';
 @import '@/assets/hovermoviepic.css';
 #movie_table {
   width: 100%;

@@ -2,9 +2,11 @@ const axios = require('axios')
 require('dotenv').config()
 const apiKey = process.env.OMDB_API_KEY
 
-module.exports = async function fetchAndAccessMovieData(movieTitle) {
+module.exports = async function fetchAndAccessMovieDetails(movieTitle) {
   try {
-    const response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(id)}&type=movie`)
+    const response = await axios.get(
+      `http://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(movieTitle)}&type=movie`
+    )
     return response.data
   } catch (error) {
     throw error

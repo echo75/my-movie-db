@@ -63,9 +63,9 @@ async function main() {
   //   `/users/${jenny.data._id}/watchlist/${movieSource.Search[0].imdbID}`
   // )
 
-  // const movieToWatchedList = await axios.post(`/users/${jenny.data._id}/watchedlist`, {
-  //   movie: movieSource.Search[1],
-  // })
+  const movieToWatchedList = await axios.post(`/users/${loggedin.data._id}/watchedlist`, {
+    movie: movieSource.Search[5],
+  })
 
   // const deleteMovieFromWatchedList = await axios.delete(
   //   `/users/${jenny.data._id}/watchedlist/${movieSource.Search[1].imdbID}`

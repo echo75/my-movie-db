@@ -6,15 +6,11 @@ const router = express.Router()
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-  // const numberOfCalls = req.session.numberOfCalls || 0
-  // console.log('Number of calls: ', numberOfCalls)
-  // req.session.numberOfCalls = numberOfCalls + 1
   const users = await User.find()
   res.send(users)
 })
 
 //create new user
-
 router.post('/', async function (req, res, next) {
   try {
     const { firstName, surName, email, password } = req.body
@@ -27,8 +23,6 @@ router.post('/', async function (req, res, next) {
 
 router.post('/:id/reviews/', async function (req, res, next) {
   try {
-    //console.log('-->', req.body)
-    // save review and rating for a single movie
     const user = await User.findById(req.params.id)
     const movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })
     const review = await Review.create({
@@ -78,13 +72,24 @@ router.get('/:id/watchlist', async function (req, res, next) {
   }
 })
 
-// user/:id/watchedlist
-router.post('/:id/watchedlist', async function (req, res, next) {
-  try {
-    const user = await User.findById(req.params.id)
-    const movie = await Movie.findOne({ imdbID: req.body.movie.imdbID })
+// move movie from watchlist to watchedlist
+router.post('/:id/watchedlist/:imdbID', async function (req, res, next) {
+  let movie = await Movie.findOne({ imdbID: req.params.imdbID })
+  const user = await User.findById(req.params.id)
+
+  if (user.watched.includes(movie._id)) {
+    res.send('Movie already in watchedlist')
+  } else {
     await user.putWatched(movie)
     res.send(user)
+  }
+})
+
+// get all movies from watchedlist of a user
+router.get('/:id/watchedlist', async function (req, res, next) {
+  try {
+    const user = await User.findById(req.params.id).populate('watched')
+    res.send(user.watched)
   } catch (error) {
     res.send(error.message)
   }

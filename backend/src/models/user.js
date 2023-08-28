@@ -37,11 +37,7 @@ class User {
     this.watched.pull(movie)
     await this.save()
   }
-  // rate(rating, imdbID) {
-  //   const movieRating = new Rating(rating, imdbID, this.firstName)
-  //   this.ratings.push(movieRating)
-  //   return movieRating
-  // }
+
   async review(movie, review) {
     this.reviews.push(review)
     movie.Reviews.push(review)
