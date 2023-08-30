@@ -73,6 +73,8 @@
                       class="btn btn-secondary btn-sm watched"
                       style="margin: 1 2px"
                       :data-imdbid="movie.imdbID"
+                      data-bs-toggle="modal"
+                      data-bs-target=".review-modal"
                     >
                       Rate this movie
                     </button>
@@ -110,6 +112,7 @@
     </footer>
   </div>
   <movie-modal :movie-info="movieInfo"></movie-modal>
+  <review-modal :movie-info="movieInfo"></review-modal>
 </template>
 
 <script>
@@ -120,6 +123,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 import { useAccountStore } from '@/stores/account' // Import the account store
 import { mapState } from 'pinia'
 import MovieModal from '../components/MovieModal.vue' // Import the component
+import ReviewModal from '../components/ReviewModal.vue' // Import the component
 
 export default {
   data() {
@@ -130,7 +134,8 @@ export default {
     }
   },
   components: {
-    MovieModal // Register the component
+    MovieModal, // Register the component
+    ReviewModal // Register the component
   },
   computed: {
     ...mapState(useAccountStore, ['user']) // Map the user state to a local computed property
@@ -149,7 +154,8 @@ export default {
         this.handleAboutClick(event)
         this.fetchDetailedInfo(event)
       } else if (target.classList.contains('watched')) {
-        //this.handleWatchedClick(event)
+        this.handleReviewClick(event)
+        this.fetchDetailedInfo(event)
       }
     },
     async fetchMovies() {
@@ -217,7 +223,15 @@ export default {
       } catch (error) {
         console.error('Error fetching detailed info:', error)
       }
-    }
+    },
+    handleReviewClick(event) {
+      const target = event.target
+      if (target.classList.contains('watched')) {
+        var id = target.getAttribute('data-imdbID')
+        console.log(id)
+        this.clickedImdbId = id
+      }
+    },
   }
 }
 </script>
