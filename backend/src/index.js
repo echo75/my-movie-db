@@ -59,6 +59,12 @@ async function main() {
     movie: movieSource.Search[6],
   })
 
+  await axios.post(`/users/${loggedin.data._id}/reviews`, {
+    movie: movieSource.Search[6],
+    text: 'Test Review. One of the best movies ever!',
+    rating: 5,
+  })
+
   // const deleteMovieFromWatchList = await axios.delete(
   //   `/users/${jenny.data._id}/watchlist/${movieSource.Search[0].imdbID}`
   // )

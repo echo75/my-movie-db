@@ -21,6 +21,7 @@ router.post('/', async function (req, res, next) {
   }
 })
 
+// create review for a movie by a user
 router.post('/:id/reviews/', async function (req, res, next) {
   try {
     const user = await User.findById(req.params.id)
@@ -51,7 +52,6 @@ router.post('/:id/watchlist', async function (req, res, next) {
       Poster,
     })
   }
-
   const user = await User.findById(req.params.id)
 
   if (user.watch.includes(movie._id)) {

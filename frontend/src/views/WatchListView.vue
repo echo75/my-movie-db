@@ -109,12 +109,11 @@
       </div>
     </footer>
   </div>
-  <movie-modal :movie-info="movieInfo"></movie-modal>
+  <movie-modal :movie-info="movieInfo" :movie-review="movieReview"></movie-modal>
 </template>
 
 <script>
 import axios from 'axios'
-//import config from '@/config.js'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 import { useAccountStore } from '@/stores/account' // Import the account store
@@ -126,7 +125,8 @@ export default {
     return {
       movies: [], // To hold the fetched movies
       clickedImdbId: '', // Store clicked imdbId
-      movieInfo: {} // Store detailed movie info
+      movieInfo: {}, // Store detailed movie info
+      movieReview: [] // Store reviews
     }
   },
   props: {
@@ -151,6 +151,7 @@ export default {
       } else if (target.classList.contains('about')) {
         this.handleAboutClick(event)
         this.fetchDetailedInfo(event)
+        this.fetchReviews(event)
       } else if (target.classList.contains('watched')) {
         this.handleWatchedClick(event)
       }
@@ -240,6 +241,18 @@ export default {
         })
         console.log(response.data)
         this.movieInfo = response.data
+      } catch (error) {
+        console.error('Error fetching detailed info:', error)
+      }
+    },
+    // get all reviews of all users for a specific movie
+    async fetchReviews(event) {
+      const target = event.target
+      const imdbID = target.getAttribute('data-imdbID')
+      try {
+        const response = await axios.get(`/reviews/${imdbID}`)
+        console.log(response.data)
+        this.movieReview = response.data
       } catch (error) {
         console.error('Error fetching detailed info:', error)
       }

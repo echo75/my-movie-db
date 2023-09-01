@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Movie = require('./movie.js')
-const putReview = require('./review.js')
+const Review = require('./review.js')
 const autopopulate = require('mongoose-autopopulate')
 const passport = require('passport')
 const passportLocalMongoose = require('passport-local-mongoose')
@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
   firstName: String,
   surName: String,
   watch: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie', autopopulate: { maxDepth: 1 } }],
-  watched: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+  watched: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie', autopopulate: { maxDepth: 1 } }],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review', autopopulate: { maxDepth: 1 } }],
 })
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
@@ -38,7 +38,13 @@ class User {
     await this.save()
   }
 
-  async review(movie, review) {
+  async review(movie, text, rating) {
+    const review = await Review.create({
+      text: text,
+      rating: rating,
+      movie: movie,
+      author: this,
+    })
     this.reviews.push(review)
     movie.Reviews.push(review)
     await this.save()
@@ -103,5 +109,6 @@ class User {
 }
 
 userSchema.loadClass(User)
+userSchema.plugin(autopopulate)
 module.exports = mongoose.model('User', userSchema)
 //module.exports = User

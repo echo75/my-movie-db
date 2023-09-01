@@ -12,6 +12,7 @@ const passport = require('passport')
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const usersMovies = require('./routes/movies')
+const usersReviews = require('./routes/reviews')
 const accountsRouter = require('./routes/accounts')
 
 // requires the model with Passport-Local Mongoose plugged in
@@ -71,6 +72,7 @@ require('./database-connection')
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/movies', usersMovies)
+app.use('/reviews', usersReviews)
 app.use('/accounts', accountsRouter)
 
 // catch 404 and forward to error handler
