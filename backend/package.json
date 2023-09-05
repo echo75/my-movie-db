@@ -1,8 +1,8 @@
 {
-  "name": "template-node",
+  "name": "backend",
   "version": "1.0.0",
   "private": true,
-  "description": "Node + PlantUML Starter Template",
+  "description": "Backend that handels the API for the frontend. It also handles the database and the calls to the external API (Open Movie Database).",
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/www",
