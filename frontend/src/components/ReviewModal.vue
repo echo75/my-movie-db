@@ -74,6 +74,8 @@
 import '@/assets/fontawesome.min.js'
 import axios from 'axios'
 import RatingStars from '@/components/RatingStars.vue'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
 export default {
   name: 'ReviewModal',
@@ -92,7 +94,7 @@ export default {
   methods: {
     async handleReview() {
       console.log('review submitted')
-      await axios.post('http://localhost:3000/reviews', {
+      await axios.post('/reviews', {
         imdbID: this.movieInfo.imdbID,
         text: this.text,
         rating: this.rating
