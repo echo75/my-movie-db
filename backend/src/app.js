@@ -43,7 +43,7 @@ const clientPromise = mongoose.connection.asPromise().then(connection => (connec
 
 app.use(
   session({
-    secret: 'mlkvd893hgkhg3820',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
