@@ -373,12 +373,8 @@ th {
   margin-bottom: 21px;
 }
 
-.table > thead > tr > th,
-.table > tbody > tr > th,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > td,
-.table > tfoot > tr > td {
+.table > * > tr > th,
+.table > * > tr > td {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
@@ -407,12 +403,8 @@ th {
   background-color: #ffffff;
 }
 
-.table-condensed > thead > tr > th,
-.table-condensed > tbody > tr > th,
-.table-condensed > tfoot > tr > th,
-.table-condensed > thead > tr > td,
-.table-condensed > tbody > tr > td,
-.table-condensed > tfoot > tr > td {
+.table-condensed > * > tr > th,
+.table-condensed > * > tr > td {
   padding: 5px;
 }
 
@@ -420,12 +412,8 @@ th {
   border: 1px solid #dddddd;
 }
 
-.table-bordered > thead > tr > th,
-.table-bordered > tbody > tr > th,
-.table-bordered > tfoot > tr > th,
-.table-bordered > thead > tr > td,
-.table-bordered > tbody > tr > td,
-.table-bordered > tfoot > tr > td {
+.table-bordered > * > tr > th,
+.table-bordered > * > tr > td {
   border: 1px solid #dddddd;
 }
 
