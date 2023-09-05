@@ -247,6 +247,10 @@ export default {
 @import '@/assets/font-awesome.min.css';
 @import '@/assets/hovermoviepic.css';
 
+:root {
+  --grey: #dddddd;
+}
+
 #movie_table {
   width: 100%;
 }
@@ -275,31 +279,16 @@ td.td_delete {
 }
 
 /* Buttons */
-
-.watched {
-  border: rgb(3, 24, 93) solid 1px;
-  color: #ffca2c;
-  background-color: #2c3035;
-}
-.watched:hover {
-  color: #ffffff;
-  background-color: #727d87;
-}
-.about {
-  border: rgb(3, 24, 93) solid 1px;
-  color: #ffca2c;
-  background-color: #2c3035;
-}
-.about:hover {
-  color: #ffffff;
-  background-color: #727d87;
-}
+.watched,
+.about,
 .delete {
   border: rgb(3, 24, 93) solid 1px;
   color: #ffca2c;
   background-color: #2c3035;
 }
-.delete:hover {
+.watched:hover,
+.delete:hover,
+.about:hover {
   color: #ffffff;
   background-color: #727d87;
 }
@@ -368,12 +357,12 @@ th {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid var(--grey);
 }
 
 .table > thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #dddddd;
+  border-bottom: 2px solid var(--grey);
 }
 
 .table > caption + thead > tr:first-child > th,
@@ -386,7 +375,7 @@ th {
 }
 
 .table > tbody + tbody {
-  border-top: 2px solid #dddddd;
+  border-top: 2px solid var(--grey);
 }
 
 .table .table {
@@ -399,12 +388,12 @@ th {
 }
 
 .table-bordered {
-  border: 1px solid #dddddd;
+  border: 1px solid var(--grey);
 }
 
 .table-bordered > * > tr > th,
 .table-bordered > * > tr > td {
-  border: 1px solid #dddddd;
+  border: 1px solid var(--grey);
 }
 
 .table-bordered > thead > tr > th,
