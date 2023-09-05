@@ -9,7 +9,7 @@ module.exports = async function fetchAndAccessMovieDetails(movieTitle) {
     )
     return response.data
   } catch (error) {
-    throw error
+    throw new Error('The API-request failed because the API-Key is missing.')
   }
 }
 
