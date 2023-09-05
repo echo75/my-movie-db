@@ -4,7 +4,7 @@
       <i :class="star.icon"></i>
     </template>
 
-    <span v-if="showRating">{{ rating }} of 10</span>
+    <span v-if="showRating">&nbsp; {{ rating }} of 10</span>
   </div>
 </template>
 
@@ -49,5 +49,9 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styling here if needed */
+.fa,
+.far,
+.fas {
+  color: #ffd700;
+}
 </style>

@@ -50,13 +50,6 @@
                   </td>
                   <td>{{ movie.Title }}</td>
                   <td>{{ movie.Year }}</td>
-                  <td>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </td>
                   <td class="td_delete" @click="handleButtonClick">
                     <button
                       type="button"

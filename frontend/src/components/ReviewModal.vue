@@ -37,153 +37,24 @@
                   <h2>{{ movieInfo?.Title }}</h2>
                 </div>
                 <div class="ratingbox">
-                  <h4>
-                    Rating:
-                    <div
-                      v-show="
-                        (movieInfo && movieInfo.imdbRating == 'N/A') || movieInfo.imdbRating == 0
-                      "
-                      class="rating"
-                    >
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 0 && movieInfo.imdbRating < 1"
-                      class="rating"
-                    >
-                      <i class="fas fa-star-half-alt"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 1 && movieInfo.imdbRating < 2"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 2 && movieInfo.imdbRating < 3"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 3 && movieInfo.imdbRating < 4"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 4 && movieInfo.imdbRating < 5"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 5 && movieInfo.imdbRating < 6"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 6 && movieInfo.imdbRating < 7"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 7 && movieInfo.imdbRating < 8"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 8 && movieInfo.imdbRating < 9"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <div
-                      v-show="movieInfo && movieInfo.imdbRating >= 9 && movieInfo.imdbRating < 10"
-                      class="rating"
-                    >
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <div class="rating" v-if="movieInfo.imdbRating === 'N/A'">
-                      &nbsp;&nbsp; (no rating)
-                    </div>
-                    <div class="rating" v-else>&nbsp;&nbsp; {{ movieInfo.imdbRating }} of 10</div>
-                  </h4>
+                  <div class="rating" v-if="movieInfo.imdbRating === 'N/A'">
+                    <h4>&nbsp;&nbsp; (no rating)</h4>
+                  </div>
+                  <div class="rating" v-else>
+                    <h4>
+                      Rating: &nbsp;
+                      <rating-stars :value="movieInfo.imdbRating"></rating-stars>
+                    </h4>
+                  </div>
                 </div>
-                <rating-stars :value="movieInfo.imdbRating"></rating-stars>
+
                 <div class="ratingbox">
                   <h4>Write a Review:</h4>
                   <form @submit.prevent="handleReview">
                     <textarea v-model="text" name="text" id="text" cols="30" rows="10"></textarea>
                     <button type="submit" class="btn btn-outline-dark me-2">Submit</button>
                   </form>
-                </div>
-                <div class="reviews">
-                  <h4>Reviews:</h4>
-
-                  <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic nihil
-                    illum! Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut
-                    laudantium autem odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit
-                    amet consectetur adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus,
-                    id iusto sunt minima ut rerum quis omnis aut laudantium autem odit possimus
-                    quaerat animi molestiae. Lorem ipsum, dolor sit amet consectetur adipisicing
-                    elit. Dolorum hic nihil illum! Dolorum repellendus, id iusto sunt minima ut
-                    rerum quis omnis aut laudantium autem odit possimus quaerat animi molestiae.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum hic nihil
-                    illum! Dolorum repellendus, id iusto sunt minima ut rerum quis omnis aut
-                    laudantium autem odit possimus quaerat animi molestiae. Lorem ipsum, dolor sit
-                    amet consectetur adipisicing elit. Dolorum hic nihil illum! Dolorum repellendus,
-                    id iusto sunt minima ut rerum quis omnis aut laudantium autem odit possimus
-                    quaerat animi molestiae.
-                  </p>
+                  <br /><br />
                 </div>
               </div>
             </div>

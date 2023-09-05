@@ -50,13 +50,6 @@
                   </td>
                   <td>{{ movie.Title }}</td>
                   <td>{{ movie.Year }}</td>
-                  <td>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </td>
                   <td class="td_delete" @click="handleButtonClick">
                     <button
                       type="button"
@@ -111,7 +104,7 @@
       </div>
     </footer>
   </div>
-  <movie-modal :movie-info="movieInfo"></movie-modal>
+  <movie-modal :movie-info="movieInfo" :movie-review="movieReview"></movie-modal>
   <review-modal :movie-info="movieInfo"></review-modal>
 </template>
 
@@ -130,7 +123,8 @@ export default {
     return {
       movies: [], // To hold the fetched movies
       clickedImdbId: '', // Store clicked imdbId
-      movieInfo: {} // To hold the movie info
+      movieInfo: {}, // To hold the movie info
+      movieReview: [] // Store reviews
     }
   },
   components: {
@@ -153,6 +147,7 @@ export default {
       } else if (target.classList.contains('about')) {
         this.handleAboutClick(event)
         this.fetchDetailedInfo(event)
+        this.fetchReviews(event)
       } else if (target.classList.contains('watched')) {
         this.handleReviewClick(event)
         this.fetchDetailedInfo(event)
@@ -232,6 +227,18 @@ export default {
         this.clickedImdbId = id
       }
     },
+    // get all reviews of all users for a specific movie
+    async fetchReviews(event) {
+      const target = event.target
+      const imdbID = target.getAttribute('data-imdbID')
+      try {
+        const response = await axios.get(`/reviews/${imdbID}`)
+        console.log(response.data)
+        this.movieReview = response.data
+      } catch (error) {
+        console.error('Error fetching detailed info:', error)
+      }
+    }
   }
 }
 </script>
