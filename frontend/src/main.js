@@ -1,4 +1,4 @@
-import './assets/main.css'
+import '/node_modules/bootstrap/dist/css/bootstrap.css'
 import 'bootstrap' // Import Bootstrap JavaScript
 
 import { createApp } from 'vue'
