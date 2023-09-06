@@ -1,9 +1,13 @@
+
 FROM node:alpine
+
+
 
 WORKDIR /app
 
 # add package.json and package-lock.json to the container
 ADD package.json package-lock.json ./
+
 # Install dependencies
 RUN npm install
 
