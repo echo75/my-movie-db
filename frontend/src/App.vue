@@ -3,6 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useAccountStore } from './stores/account'
 import { mapActions, mapState } from 'pinia'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap' // Import Bootstrap JavaScript
+
 export default {
   name: 'App',
   components: {

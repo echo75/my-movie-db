@@ -1,6 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap' // Import Bootstrap JavaScript
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
