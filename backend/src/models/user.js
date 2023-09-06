@@ -51,61 +51,6 @@ class User {
     await movie.save()
     return review
   }
-
-  //getters here:
-
-  ratingsAverage(imdbID) {
-    //console.log('ratingsAverage', this.ratings)
-    const filteredRatings = this.ratings.filter(rating => rating.imdbID === imdbID)
-    //console.log('filteredRatings', filteredRatings)
-    if (filteredRatings.length === 0) {
-      return 0 // Return 0 if there are no ratings
-    } else {
-      return (
-        'Rating for ' +
-        imdbID +
-        ': ' +
-        filteredRatings.reduce((acc, rating) => acc + rating.rating, 0) / filteredRatings.length
-      )
-    }
-  }
-
-  reviewsMovie(imdbID) {
-    const filteredReviews = this.reviews.filter(review => review.imdbID === imdbID)
-    //console.log('filteredReviews', filteredReviews)
-    const result =
-      filteredReviews.length === 0
-        ? 'No reviews for this movie'
-        : filteredReviews
-            .map(
-              (element, index) =>
-                `${index + 1}. ${element.text} -> Movie:(${element.imdbID}), says User: ${this.firstName}`
-            )
-            .join('\n')
-    return `--- Review-List ---\n${result}\n`
-  }
-
-  onWatch() {
-    // onWatchInfo
-    const result =
-      this.watch === 0
-        ? 'No movies are put on the watch-list'
-        : this.watch
-            .map((element, index) => `${index + 1}. ${element.Title} (${element.Year}) (firstName: ${this.firstName})`)
-            .join('\n')
-    return `--- Watch-List ---\n${result}\n`
-  }
-
-  onWatched() {
-    // onWatchedInfo
-    const result =
-      this.watched === 0
-        ? 'No movies are put on the watched-list'
-        : this.watched
-            .map((element, index) => `${index + 1}. ${element.Title} (${element.Year}) (firstName: ${this.firstName})`)
-            .join('\n')
-    return `--- Watched-List ---\n${result}\n`
-  }
 }
 
 userSchema.loadClass(User)
