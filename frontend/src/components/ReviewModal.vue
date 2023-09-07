@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     async handleReview() {
-      console.log('review submitted')
+      alert('Your review has been submitted!')
       await axios.post('/reviews', {
         imdbID: this.movieInfo.imdbID,
         text: this.text,
