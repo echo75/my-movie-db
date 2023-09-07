@@ -93,12 +93,13 @@ export default {
   },
   methods: {
     async handleReview() {
-      alert('Your review has been submitted!')
+      //alert('Your review has been submitted!')
       await axios.post('/reviews', {
         imdbID: this.movieInfo.imdbID,
         text: this.text,
         rating: this.rating
-      })
+      }),
+        alert('Your review has been submitted!')
     }
   }
 }
