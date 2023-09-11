@@ -93,13 +93,16 @@ export default {
   },
   methods: {
     async handleReview() {
-      //alert('Your review has been submitted!')
-      await axios.post('/reviews', {
-        imdbID: this.movieInfo.imdbID,
-        text: this.text,
-        rating: this.rating
-      }),
-        alert('Your review has been submitted!')
+      if (this.text.length < 5) {
+        alert('Your review must be at least 5 characters long.')
+      } else {
+        await axios.post('/reviews', {
+          imdbID: this.movieInfo.imdbID,
+          text: this.text,
+          rating: this.rating
+        }),
+          alert('Your review has been submitted!')
+      }
     }
   }
 }
