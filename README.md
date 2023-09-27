@@ -1,70 +1,50 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=11440993)
-# Coyotiv School of Software Engineering
-
-## Node & PlantUML Starter Template
-
----
+# Porch Reads Club
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Now you can directly work in your browser!
+A MEVN stack application to help anyone manage their own little virtual movie library online.
 
-## Getting started
+## Accessing the app online
 
-### Node / JS
+A hosted production version is available at https://frontend-kb76qm2suq-ew.a.run.app/. Please have a little patience, as the app is hosted on a free tier of Google Cloud Run and may take a few seconds to start up.
 
-> **Note:**
->
-> - _There is an **index.js** file located under the \*\*\_src_\*\* folder\_
-> - _The **index.js** file, it's already linked with the debugger in your **launch.json**_
-
-To run the **index.js** file:
-
-- with **_node_**, copy and enter one of the following commands on your terminal:
-
-  ```sh
-  npm start
-  ```
-
-  or:
-
-  ```sh
-  node src/index.js
-  ```
-
-- in development mode that restarts every time you save a file:
-
-  ```sh
-  npm run dev
-  ```
-
-### PlantUML
+## Setting up locally for development
 
 > **Note:**
->
-> - There is a **class.puml** example file located in the **_architecture_** folder.
+> The guide assumes you have Docker and Docker Compose installed locally. If not, refer to the [Docker documentation](https://docs.docker.com/compose/install/) for installation instructions.
 
-To start working **_\*.puml_** files:
+You will need an API key for the following services:
 
-- You can continue by editing the **class.puml** file
-- Add additional **_\*.puml_** files on that folder too.
+- [OMDb API](https://www.omdbapi.com/) for searching for movies
 
-If you what to visualize a preview of the **class.puml** file or another **_\*.puml_** file on the project, please select the file and on your keyboard press the following keys:
+Create `.env` files in the frontend and backend directories with contents similar to the `.env.example` files.
 
-- _MacOS_: **Option + D**
+Then, run the app with the following:
 
-- _Linux/Windows_: **Alt + D**
-  The above commands will automatically open your a window and will show you live any updates that you make on the file.
+```bash
+docker compose up -d mongo
+docker compose up api frontend
+```
 
----
+This will start up the necessary Docker containers - the backend Node.js app, the MongoDB database, and the frontend Vue.js app. The Mongo container will be started in the background, so you don't get the tons of output from it.
 
-_Now that we are ready, let's have some coding fun!_
+The backend API will be available at http://localhost:3000 and the frontend at http://localhost:5173.
 
----
+> **Note**: in dev environment, the app uses live reload for changes inside the `src` directory in both the frontend and backend. Any changes to files outside of `src`, e.g. package installations, will require a rebuild of the respective containers.
+
+### Customising the environment
+
+If using your own MongoDB instance, there is no need to run the mongo service, so after modifying `backend/.env` accordingly you can just run the app with:
+
+```bash
+docker compose up api frontend
+```
 
 ## MIT License
 
-Copyright (c) 2022 Coyotiv
+Project: Copyright (c) 2023 Johan Hedman
+
+Node template: Copyright (c) 2023 Coyotiv
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
