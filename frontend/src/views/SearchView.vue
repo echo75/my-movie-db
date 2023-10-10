@@ -212,7 +212,7 @@ export default {
         </div>
       </div>
     </div>
-    <footer>
+    <footer v-if="movies.length != 0">
       <div class="row">
         <div class="col-lg-12">
           <ul class="list-unstyled">
