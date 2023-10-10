@@ -14,7 +14,8 @@ export default {
   },
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      currentYear: new Date().getFullYear()
     }
   },
   async beforeMount() {
@@ -57,6 +58,12 @@ div(v-else)
           button.btn.btn-outline-light.me-2(type='button' v-show='user' @click='doLogout') Log out
           button.btn.btn-outline-light(type='button' v-show='!user' v-on:click="$router.push('/signup')") Sign up
   <RouterView />
+  footer.p-3.text-bg-dark.fixed-bottom
+    .container
+      .row
+        .col-12.text-center.text-white
+          p.mt-2.mb-2
+            | &copy; {{ currentYear }} by Johan Hedman. Proudly created with Vue.js
 </template>
 
 <style scoped>
