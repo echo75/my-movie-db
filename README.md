@@ -6,7 +6,7 @@ A MEVN stack application to help anyone manage their own little virtual movie li
 
 ## Accessing the app online
 
-A hosted production version is available at https://frontend-kb76qm2suq-ew.a.run.app/. Please have a little patience, as the app is hosted on a free tier of Google Cloud Run and may take a few seconds to start up.
+A hosted production version is available at https://my-movie-db2-kb76qm2suq-ew.a.run.app/. Please have a little patience, as the app is hosted on a free tier of Google Cloud Run and may take a few seconds to start up.
 
 ## Setting up locally for development
 
