@@ -116,7 +116,7 @@ export default {
       <form @submit.prevent="fetchMovies" class="well form-search">
         <div class="row">
           <div class="col-md-12 mt-5">
-            <h2>Search for a movie</h2>
+            <h2 class="mb-3">Search for a movie</h2>
             Type a search term or a movie name to find a match in the OMDb.<br /><br />
             <div class="input-group">
               <label class="control-label" for="search_s"></label>

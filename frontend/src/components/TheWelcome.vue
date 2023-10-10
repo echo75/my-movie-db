@@ -12,7 +12,12 @@ div.container
     div.bs-docs-section
         div.row
             div.col-md-12.mt-5
-            h2 Movie DB Users
-            ul
-              li(v-for="user in data" :key="user.id") {{ user.firstName }} {{ user.surName }}
+            h2.mb-3 My Movie DB
+            p.padding-left This is a simple Vue.js frontend with a Node.js backend. The backend is using Express.js and MongoDB.
 </template>
+
+<style scoped>
+.padding-left {
+  padding-left: 12px;
+}
+</style>
