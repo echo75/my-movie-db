@@ -115,9 +115,8 @@ export default {
     <div class="bs-docs-section" id="examples">
       <form @submit.prevent="fetchMovies" class="well form-search">
         <div class="row">
-          <div class="col-md-12">
-            <br />
-            <br />
+          <div class="col-md-12 mt-5">
+            Type a search term or a movie name to find a match in the OMDb.<br /><br />
             <div class="input-group">
               <label class="control-label" for="search_s"></label>
               <input type="text" id="search_s" v-model="search_s" class="input-small" />
