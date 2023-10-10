@@ -63,7 +63,7 @@ div(v-else)
       .row
         .col-12.text-center.text-white
           p.mt-2.mb-2
-            | &copy; {{ currentYear }} by Johan Hedman. Proudly created with Vue.js
+            | &copy; {{ currentYear }} by Johan Hedman. Proudly created with the MEVN stack.
 </template>
 
 <style scoped>
