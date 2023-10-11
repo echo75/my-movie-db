@@ -17,6 +17,10 @@ div.container
                     br
                     br
                     |The My Movie DB has a Vue.js frontend with a Node.js backend. The backend is using Express.js and MongoDB.
+                    br
+                    br
+                    br
+                    br
     //- p(v-if="user") You are logged in as {{ user?.data?.email }} p(v-if="user") Logged in as:
     //- {{ user?.email }}
 

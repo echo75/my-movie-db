@@ -36,6 +36,11 @@ div.container
               br
               | For more information, please visit the <a href="/about" target="_self">About</a> page!
               br
+              br
+              br
+              br
+              br
+              br
 </template>
 
 <style scoped>
