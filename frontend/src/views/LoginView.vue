@@ -40,7 +40,7 @@ import '../assets/login.css' // Import login.css only for this component
             .input-group-prepend
               span.input-group-text
                 i.fas.fa-envelope
-            input#email.form-control(type="text" v-model="email" placeholder='email' required autofocus)
+            input#email.form-control(type="email" v-model="email" placeholder='email' required autofocus)
           .input-group.form-group
             .input-group-prepend
               span.input-group-text
