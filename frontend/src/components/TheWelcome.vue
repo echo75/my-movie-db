@@ -17,7 +17,7 @@ div.container
             div.padding-left
               | If you want to benefit from the functionality of the site, it's best to log in - with or without your own account.
               br
-              | For more information, please visit the 'About' page.
+              | For more information, please visit the 'About' page!
 </template>
 
 <style scoped>
