@@ -1,9 +1,15 @@
 <template>
   <div class="container">
     <div class="bs-docs-section" id="examples">
-      <br />
-      <br />
-      <br />
+      <div class="row">
+        <div class="col-md-12 mt-5">
+          <h2 class="mb-3">My Watch List</h2>
+          <p class="padding-left" v-if="movies.length != 0">Here is a selection of movies you've stored from the OMDd, and you're looking forward to watching them on your TV.<br>
+            But first read about the movie and decide whether you'd like to watch it or not.</p>
+          <p class="padding-left" v-if="movies.length === 0">You don't have any movies saved from the OMDd that you're eager to watch on your TV.<br>
+            Navigate to the <a href="/search" target="_self">Search</a> function and find a great movie for yourself.</p>
+      </div>
+    </div>
       <div class="row">
         <div class="col-lg-12">
           <div class="bs-component">

@@ -16,8 +16,7 @@ div.container
                     |Use the login tab at the top right to log in.
                     br
                     br
-                    |This is a simple Vue.js frontend with a Node.js backend. The backend is using Express.js and MongoDB.
-
+                    |The My Movie DB has a Vue.js frontend with a Node.js backend. The backend is using Express.js and MongoDB.
     //- p(v-if="user") You are logged in as {{ user?.data?.email }} p(v-if="user") Logged in as:
     //- {{ user?.email }}
 

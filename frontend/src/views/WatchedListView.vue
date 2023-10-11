@@ -1,9 +1,15 @@
 <template>
   <div class="container">
     <div class="bs-docs-section" id="examples">
-      <br />
-      <br />
-      <br />
+      <div class="row">
+        <div class="col-md-12 mt-5">
+          <h2 class="mb-3">My Watched List</h2>
+          <p class="padding-left" v-if="movies.length != 0">This is your library of all the movies you've watched. Feel free to write a review for a movie, if you'd like.</p>
+          <p class="padding-left" v-if="movies.length === 0">There are currently no movies marked as 'watched' in My Watched List.<br>
+          To update My Watched List, simply browse your <a href="/watchlist" target="_self">My Watch List</a>, select a movie you'd like to watch, and move it to My Watched List after you have seen it. <br>
+          You can also take this opportunity to write a review of the movie later on My Watched List.</p>
+      </div>
+    </div>
       <div class="row">
         <div class="col-lg-12">
           <div class="bs-component">

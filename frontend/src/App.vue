@@ -48,9 +48,9 @@ div(v-else)
           li
             a.nav-link.px-2.text-white(:class="{ active: $route.path === '/search' }", href='/search') Search
           li
-            a.nav-link.px-2.text-white(:class="{ active: $route.path === '/watchlist' }", v-show='user', href='/watchlist') My Watchlist
+            a.nav-link.px-2.text-white(:class="{ active: $route.path === '/watchlist' }", v-show='user', href='/watchlist') My Watch List
           li
-            a.nav-link.px-2.text-white(:class="{ active: $route.path === '/watchedlist' }", v-show='user', href='/watchedlist') My Watched-List
+            a.nav-link.px-2.text-white(:class="{ active: $route.path === '/watchedlist' }", v-show='user', href='/watchedlist') My Watched List
           li
             a.nav-link.px-2.text-white(:class="{ active: $route.path === '/about' }", href='/about') About
         .text-end
