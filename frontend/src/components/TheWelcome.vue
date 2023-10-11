@@ -21,7 +21,7 @@ div.container
             p.padding-left
               strong Here's a more concise and clear way to express the process:
 
-            ol
+            ol.margin-left
               li Begin by searching for a movie using the search function.
               li Once you find a movie, add it to your "My Watch List." Here, you can access movie details and ratings.
                 br
@@ -46,6 +46,9 @@ div.container
 <style scoped>
 .padding-left {
   padding-left: 12px;
+}
+.margin-left {
+  margin-left: 18px;
 }
 a {
   color: #008cba;
