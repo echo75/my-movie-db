@@ -18,9 +18,19 @@ export default {
   },
   methods: {
     ...mapActions(useAccountStore, ['login']),
-    async doLogin() {
-      await this.login({ email: this.email, password: this.password })
-      this.$router.push('/login')
+
+     async doLogin() {
+    //   await this.login({ email: this.email, password: this.password })
+    //   this.$router.push('/login')
+    try {
+        await this.login({ email: this.email, password: this.password })
+        // Successful login
+        this.$router.push('/login')
+      } catch (error) {
+        // Handle login errors, set the loginError property to display the error message
+        this.loginError = 'Login failed. Please check your credentials.'
+        alert(this.loginError)
+      }
     }
   }
 }
