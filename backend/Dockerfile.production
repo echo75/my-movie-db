@@ -9,6 +9,7 @@ ADD package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install --production
+RUN npm audit fix --force
 
 # Add the rest of the files
 ADD bin ./bin

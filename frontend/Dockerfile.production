@@ -11,6 +11,8 @@ ADD package.json package-lock.json ./
 # Install dependencies
 RUN npm install
 
+RUN npm audit fix --force
+
 # Add the rest of the files
 ADD index.html /app/index.html
 ADD vite.config.js /app/vite.config.js
