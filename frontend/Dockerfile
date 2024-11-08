@@ -3,7 +3,8 @@ FROM node:alpine
 
 ENV NODE_ENV=production
 
-WORKDIR /app
+#WORKDIR /app
+WORKDIR /var/www/html
 
 # Add package.json and package-lock.json to the container
 ADD package.json package-lock.json ./
