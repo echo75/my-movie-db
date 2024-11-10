@@ -3,8 +3,8 @@ FROM node:alpine
 
 ENV NODE_ENV=production
 
-#WORKDIR /app
-WORKDIR /var/www/html
+WORKDIR /app
+#WORKDIR /var/www/html
 
 # Add package.json and package-lock.json to the container
 ADD package.json package-lock.json ./
@@ -12,7 +12,7 @@ ADD package.json package-lock.json ./
 # Install dependencies
 RUN npm install
 
-RUN npm audit fix --force
+#RUN npm audit fix --force
 
 # Add the rest of the files
 ADD index.html /app/index.html
